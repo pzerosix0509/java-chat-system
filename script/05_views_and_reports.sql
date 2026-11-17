@@ -1,0 +1,14 @@
+-- =====================================================================
+-- 05_views_and_reports.sql  [PLACEHOLDER]
+-- Muc dich: View / query phuc vu 6 man hinh thong ke cua Admin.
+--   v_user_friend_counts      -> so ban truc tiep + so ban cua ban (MC1.7)
+--   v_active_users            -> app_open_count, people_chatted_with,
+--                                groups_chatted_in, activity_count (MC1.8)
+--   v_registration_by_month   -> bieu do nguoi dang ky theo nam (MC1.6)
+--   v_activity_by_month       -> bieu do nguoi hoat dong theo nam (MC1.9)
+--   v_recent_login_history    -> MC1.2
+--   v_spam_reports            -> MC1.4
+-- =====================================================================
+
+-- TODO: CREATE OR REPLACE VIEW ...
+-- Dinh nghia chi tiet xem them: ../database/sql/README.md muc 4 (quy uoc nghiep vu).

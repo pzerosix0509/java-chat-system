@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.chatapp</groupId>
+  <artifactId>java-chat-system</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+
+  <name>Java Chat System</name>
+  <description>Do an cuoi ky - he thong chat 2 phan he (admin, user)</description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <javafx.version>21</javafx.version>
+  </properties>
+
+  <!--
+    TODO khi bat dau implement: them cac dependency
+      - org.openjfx:javafx-controls / javafx-fxml / javafx-graphics (${javafx.version})
+      - com.mysql:mysql-connector-j
+      - com.fasterxml.jackson.core:jackson-databind
+      - ch.qos.logback:logback-classic
+      - org.junit.jupiter:junit-jupiter (scope test)
+    Va plugin:
+      - org.openjfx:javafx-maven-plugin
+      - maven-shade-plugin (tao 2 jar cho admin/user, co Main-Class rieng)
+  -->
+  <dependencies>
+  </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+  </build>
+</project>

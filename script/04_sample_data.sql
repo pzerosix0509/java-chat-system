@@ -1,0 +1,14 @@
+-- =====================================================================
+-- 04_sample_data.sql  [PLACEHOLDER]
+-- Muc dich: Du lieu mau phuc vu demo, chup anh báo cao, quay video.
+--   - 2 role: USER, ADMIN
+--   - ~20 users (co active/locked, nam/nu, ngay sinh khac nhau)
+--   - ban be, yeu cau ket ban, block
+--   - 1-1 chat + nhom chat (co admin nhom)
+--   - tin nhan (mot so da xoa 1 dong / xoa lich su)
+--   - spam reports
+--   - lich su dang nhap + phien bao mat khac thang trong nam
+-- =====================================================================
+
+-- TODO: INSERT INTO ...
+-- Luu y: mat khau phai la hash (bcrypt/argon2), khong luu plain text.

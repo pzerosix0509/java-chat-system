@@ -1,0 +1,14 @@
+-- =====================================================================
+-- 02_create_tables.sql  [PLACEHOLDER]
+-- Muc dich: Tao toan bo bang.
+--   users, roles, user_roles, password_reset_tokens,
+--   login_history, user_sessions,
+--   friendships, friend_requests, user_blocks,
+--   conversations, direct_conversations, chat_groups,
+--   conversation_members, conversation_key_envelopes,
+--   messages, message_hidden_for, conversation_clear_markers,
+--   spam_reports, llm_usage_logs
+-- Tham khao: ../database/sql/chat_app_schema.sql
+-- =====================================================================
+
+-- TODO: copy cac cau CREATE TABLE tu script goc sang day (hoac giu nguyen script goc).
