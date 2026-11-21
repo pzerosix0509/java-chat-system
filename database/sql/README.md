@@ -75,6 +75,8 @@ SOURCE chat_app_schema.sql;
 
 Có thể chạy từng file theo thứ tự số nếu cần migration/debug. Các file dùng `IF NOT EXISTS` (và view dùng `CREATE OR REPLACE`) nên có thể chạy lại an toàn trong môi trường phát triển.
 
+Nếu database cũ đã được tạo trước khi bổ sung ngữ cảnh LLM, chạy một lần `migrations/001_add_llm_usage_context.sql`. Không chạy migration này trên database mới vì các cột và khóa ngoại đã có sẵn trong `schema/50_reports_and_llm.sql`.
+
 Kết nối Java bằng JDBC và dùng `PreparedStatement` cho mọi tham số. Các câu SQL nghiệp vụ nên đặt trong repository/DAO, không trộn vào DDL.
 
 ## 6. Những điểm tầng Java phải kiểm tra

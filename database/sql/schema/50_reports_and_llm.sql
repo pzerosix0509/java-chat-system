@@ -27,14 +27,21 @@ CREATE TABLE IF NOT EXISTS spam_reports (
 CREATE TABLE IF NOT EXISTS llm_usage_logs (
     usage_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     user_id BIGINT UNSIGNED NOT NULL,
+    conversation_id BIGINT UNSIGNED NULL,
+    source_message_id BIGINT UNSIGNED NULL,
     feature ENUM('REWRITE','SUGGEST_REPLY','OTHER') NOT NULL,
     provider VARCHAR(80) NULL,
     model_name VARCHAR(120) NULL,
     input_tokens INT UNSIGNED NULL,
     output_tokens INT UNSIGNED NULL,
     status ENUM('SUCCESS','FAILED') NOT NULL,
+    error_message VARCHAR(500) NULL,
     created_at DATETIME(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
     PRIMARY KEY (usage_id),
     KEY idx_llm_user_time (user_id, created_at),
-    CONSTRAINT fk_llm_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE
+    KEY idx_llm_conversation (conversation_id, created_at),
+    KEY idx_llm_source_message (source_message_id),
+    CONSTRAINT fk_llm_user FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT fk_llm_conversation FOREIGN KEY (conversation_id) REFERENCES conversations(conversation_id) ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT fk_llm_source_message FOREIGN KEY (source_message_id) REFERENCES messages(message_id) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB;
