@@ -2169,3 +2169,319 @@
 .group-tab-content {
     -fx-padding: 12px 0 0;
 }
+
+/* =====================================================
+   SPAM REPORTS
+   ===================================================== */
+
+.spam-status-badge {
+    -fx-padding: 5px 9px;
+    -fx-background-radius: 12px;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+}
+
+.spam-status-pending {
+    -fx-background-color: #FFF8D9;
+    -fx-text-fill: #9A7800;
+}
+
+.spam-status-reviewing {
+    -fx-background-color: #F1F1F1;
+    -fx-text-fill: #666666;
+}
+
+.spam-status-resolved {
+    -fx-background-color: #EFFAF4;
+    -fx-text-fill: #168750;
+}
+
+.spam-report-reason {
+    -fx-max-width: 220px;
+    -fx-font-size: 10px;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-detail-page {
+    -fx-padding: 0 2px 22px 0;
+}
+
+.spam-report-header {
+    -fx-padding: 20px;
+    -fx-background-color: linear-gradient(
+        to right,
+        #FFF7EF,
+        #FFFFD9
+    );
+    -fx-background-radius: 18px;
+    -fx-border-color: #FFE0C2;
+    -fx-border-radius: 18px;
+}
+
+.spam-report-code {
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -brand-orange;
+}
+
+.spam-report-title {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-report-time {
+    -fx-font-size: 9px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-report-parties {
+    -fx-padding: 14px;
+    -fx-background-color: rgba(255, 255, 255, 0.72);
+    -fx-background-radius: 12px;
+}
+
+.spam-party-label {
+    -fx-font-size: 8px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-party-avatar {
+    -fx-min-width: 34px;
+    -fx-pref-width: 34px;
+    -fx-min-height: 34px;
+    -fx-pref-height: 34px;
+    -fx-alignment: CENTER;
+    -fx-background-color: -brand-orange-soft;
+    -fx-background-radius: 17px;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -brand-orange;
+}
+
+.spam-party-avatar-accused {
+    -fx-background-color: rgba(255, 71, 54, 0.10);
+    -fx-text-fill: -danger;
+}
+
+.spam-party-arrow,
+.spam-section-icon {
+    -fx-icon-color: -brand-orange;
+}
+
+.spam-report-layout {
+    -fx-alignment: TOP_LEFT;
+}
+
+.spam-report-main {
+    -fx-min-width: 0;
+}
+
+.spam-section-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-section-subtitle {
+    -fx-font-size: 9px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-report-message {
+    -fx-padding: 16px;
+    -fx-background-color: #FFF8F1;
+    -fx-background-radius: 0 10px 10px 0;
+    -fx-border-color: transparent transparent transparent -brand-orange;
+    -fx-border-width: 0 0 0 3px;
+    -fx-font-size: 11px;
+    -fx-line-spacing: 4px;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-context-meta {
+    -fx-font-size: 9px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-context-meta .ikonli-font-icon {
+    -fx-icon-color: -text-muted;
+}
+
+.spam-evidence-grid {
+    -fx-alignment: TOP_LEFT;
+}
+
+.spam-evidence-card {
+    -fx-min-width: 150px;
+    -fx-pref-width: 190px;
+    -fx-max-width: 220px;
+    -fx-padding: 10px;
+    -fx-background-color: -surface;
+    -fx-background-radius: 12px;
+    -fx-border-color: -border;
+    -fx-border-radius: 12px;
+}
+
+.spam-evidence-preview {
+    -fx-min-height: 168px;
+    -fx-pref-height: 168px;
+    -fx-padding: 6px;
+    -fx-background-color: #F1F1F1;
+    -fx-background-radius: 8px;
+}
+
+.spam-evidence-image {
+    -fx-smooth: true;
+}
+
+.spam-evidence-fallback {
+    -fx-padding: 14px;
+    -fx-alignment: CENTER;
+    -fx-text-alignment: CENTER;
+    -fx-font-size: 9px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-evidence-title {
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-evidence-description {
+    -fx-font-size: 8px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-evidence-file {
+    -fx-alignment: CENTER;
+}
+
+.spam-evidence-file .ikonli-font-icon {
+    -fx-icon-color: -brand-orange;
+}
+
+.spam-decision-panel {
+    -fx-min-width: 0;
+    -fx-pref-width: 370px;
+    -fx-max-width: 440px;
+    -fx-padding: 0;
+    -fx-background-color: -surface;
+    -fx-background-radius: 16px;
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 16px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 30, 30, 0.06), 16, 0.12, 0, 3);
+}
+
+.spam-decision-panel > .card-head {
+    -fx-min-height: 68px;
+    -fx-padding: 14px 16px;
+    -fx-background-color: -surface;
+    -fx-background-radius: 16px 16px 0 0;
+    -fx-border-color: transparent transparent -border transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.spam-decision-panel > .card-body {
+    -fx-padding: 16px;
+    -fx-background-color: -surface;
+    -fx-background-radius: 0 0 16px 16px;
+}
+
+.spam-decision-note {
+    -fx-padding: 11px;
+    -fx-background-color: rgba(255, 71, 54, 0.08);
+    -fx-background-radius: 10px;
+    -fx-text-fill: #A92E22;
+    -fx-font-size: 9px;
+    -fx-line-spacing: 2px;
+}
+
+.spam-decision-note .ikonli-font-icon {
+    -fx-icon-color: -danger;
+}
+
+.spam-decision-field {
+    -fx-min-width: 0;
+}
+
+.spam-decision-textarea {
+    -fx-min-height: 82px;
+    -fx-pref-row-count: 3;
+    -fx-padding: 9px 10px;
+    -fx-background-color: -surface;
+    -fx-background-radius: 8px;
+    -fx-border-color: -muted-border;
+    -fx-border-radius: 8px;
+    -fx-font-size: 10px;
+}
+
+.spam-decision-textarea:focused {
+    -fx-border-color: -brand-orange;
+}
+
+.spam-field-help {
+    -fx-font-size: 8px;
+    -fx-text-fill: -text-muted;
+}
+
+.spam-validation {
+    -fx-padding: 9px 10px;
+    -fx-background-color: rgba(255, 71, 54, 0.09);
+    -fx-background-radius: 8px;
+    -fx-text-fill: -danger;
+    -fx-font-size: 9px;
+}
+
+.spam-decision-actions {
+    -fx-alignment: CENTER;
+    -fx-spacing: 8px;
+}
+
+.spam-lock-action,
+.spam-no-lock-action {
+    -fx-min-width: 124px;
+    -fx-pref-width: 145px;
+    -fx-max-width: Infinity;
+    -fx-min-height: 38px;
+    -fx-pref-height: 38px;
+    -fx-padding: 0 10px;
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-content-display: LEFT;
+    -fx-graphic-text-gap: 6px;
+}
+
+.spam-no-lock-action {
+    -fx-background-color: #EFFAF4;
+    -fx-border-color: #B7E4CB;
+    -fx-border-width: 1px;
+    -fx-text-fill: #147A4D;
+}
+
+.spam-no-lock-action .ikonli-font-icon {
+    -fx-icon-color: #147A4D;
+}
+
+.spam-no-lock-action:hover {
+    -fx-background-color: #E4F6EC;
+    -fx-border-color: #83D0A5;
+}
+
+.admin-toast {
+    -fx-max-width: 440px;
+    -fx-padding: 11px 15px;
+    -fx-background-color: #242424;
+    -fx-background-radius: 11px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 14, 0.16, 0, 4);
+    -fx-font-size: 10px;
+    -fx-text-fill: white;
+}
+
+.spam-report-layout {
+    -fx-hgap: 16px;
+    -fx-vgap: 16px;
+}
