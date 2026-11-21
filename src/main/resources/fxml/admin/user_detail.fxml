@@ -1,16 +1,204 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-id-card" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Chi tiết người dùng" styleClass="empty-page-title" />
-        <Label text="Thông tin và các hành động quản trị người dùng sẽ được xây dựng sau"
-               styleClass="empty-page-description" />
-    </VBox>
-</StackPane>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chatapp.admin.controller.UserDetailController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            styleClass="detail-scroll">
+
+    <content>
+        <VBox spacing="14" styleClass="admin-page,user-detail-page">
+
+            <Button text="Danh sách người dùng"
+                    onAction="#goBack"
+                    styleClass="button-outline,detail-back-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-arrow-left" iconSize="13" />
+                </graphic>
+            </Button>
+
+            <HBox alignment="CENTER_LEFT"
+                  spacing="15"
+                  styleClass="user-detail-header">
+
+                <Label fx:id="avatarLabel"
+                       styleClass="user-detail-avatar" />
+
+                <VBox spacing="5" HBox.hgrow="ALWAYS">
+                    <Label fx:id="fullNameLabel"
+                           styleClass="user-detail-name" />
+                    <Label fx:id="identityLabel"
+                           styleClass="user-detail-identity" />
+                    <Label fx:id="statusBadge"
+                           styleClass="detail-status-badge" />
+                </VBox>
+
+                <Button text="Chỉnh sửa"
+                        onAction="#editUser"
+                        styleClass="button-outline">
+                    <graphic>
+                        <FontIcon iconLiteral="fas-edit" iconSize="13" />
+                    </graphic>
+                </Button>
+
+                <Button fx:id="lockButton"
+                        onAction="#toggleLock">
+                    <graphic>
+                        <FontIcon fx:id="lockButtonIcon" iconSize="13" />
+                    </graphic>
+                </Button>
+
+            </HBox>
+
+            <TabPane tabClosingPolicy="UNAVAILABLE"
+                     styleClass="user-detail-tabs">
+
+                <tabs>
+                    <Tab text="Thông tin chung">
+                        <VBox spacing="14" styleClass="detail-tab-content">
+
+                            <VBox spacing="13" styleClass="detail-card">
+                                <Label text="Thông tin tài khoản"
+                                       styleClass="detail-card-title" />
+
+                                <GridPane hgap="18" vgap="16">
+                                    <columnConstraints>
+                                        <ColumnConstraints percentWidth="50" />
+                                        <ColumnConstraints percentWidth="50" />
+                                    </columnConstraints>
+
+                                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                        <Label text="TÊN ĐĂNG NHẬP" styleClass="detail-field-label" />
+                                        <Label fx:id="usernameValue" styleClass="detail-field-value" />
+                                    </VBox>
+                                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                        <Label text="EMAIL" styleClass="detail-field-label" />
+                                        <Label fx:id="emailValue" styleClass="detail-field-value" />
+                                    </VBox>
+                                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                        <Label text="GIỚI TÍNH" styleClass="detail-field-label" />
+                                        <Label fx:id="genderValue" styleClass="detail-field-value" />
+                                    </VBox>
+                                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                        <Label text="NGÀY SINH" styleClass="detail-field-label" />
+                                        <Label fx:id="birthDateValue" styleClass="detail-field-value" />
+                                    </VBox>
+                                    <VBox spacing="5" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                        <Label text="ĐỊA CHỈ" styleClass="detail-field-label" />
+                                        <Label fx:id="addressValue" wrapText="true" styleClass="detail-field-value" />
+                                    </VBox>
+                                    <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                        <Label text="NGÀY TẠO" styleClass="detail-field-label" />
+                                        <Label fx:id="createdAtValue" styleClass="detail-field-value" />
+                                    </VBox>
+                                </GridPane>
+                            </VBox>
+
+                            <VBox spacing="13" styleClass="detail-card">
+                                <Label text="Bảo mật tài khoản"
+                                       styleClass="detail-card-title" />
+                                <Label fx:id="lockInfoLabel"
+                                       wrapText="true"
+                                       styleClass="detail-security-copy" />
+
+                                <HBox alignment="CENTER_LEFT"
+                                      spacing="12"
+                                      styleClass="password-reset-row">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Đặt lại mật khẩu"
+                                               styleClass="detail-action-title" />
+                                        <Label text="Mật khẩu hiện tại không bao giờ được hiển thị."
+                                               styleClass="detail-security-copy" />
+                                    </VBox>
+                                    <Button text="Đặt lại mật khẩu"
+                                            onAction="#resetPassword"
+                                            styleClass="button-outline" />
+                                </HBox>
+
+                                <HBox alignment="CENTER_LEFT"
+                                      spacing="12"
+                                      styleClass="detail-danger-zone">
+                                    <VBox spacing="4" HBox.hgrow="ALWAYS">
+                                        <Label text="Vùng nguy hiểm"
+                                               styleClass="detail-danger-title" />
+                                        <Label text="Xóa mềm tài khoản và ngăn mọi lần đăng nhập mới."
+                                               styleClass="detail-security-copy" />
+                                    </VBox>
+                                    <Button text="Xóa người dùng"
+                                            onAction="#deleteUser"
+                                            styleClass="button-danger" />
+                                </HBox>
+                            </VBox>
+
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Lịch sử đăng nhập">
+                        <VBox spacing="10" styleClass="detail-tab-content">
+                            <Label text="Các lần đăng nhập gần nhất của người dùng"
+                                   styleClass="detail-card-title" />
+                            <SortableTableView fx:id="loginTable"
+                                               prefHeight="350">
+                                <columns>
+                                    <TableColumn fx:id="loginTimeColumn"
+                                                 text="THỜI GIAN"
+                                                 prefWidth="180" />
+                                    <TableColumn fx:id="loginDeviceColumn"
+                                                 text="THIẾT BỊ"
+                                                 prefWidth="220" />
+                                    <TableColumn fx:id="loginIpColumn"
+                                                 text="ĐỊA CHỈ IP"
+                                                 prefWidth="150" />
+                                    <TableColumn fx:id="loginResultColumn"
+                                                 text="KẾT QUẢ"
+                                                 prefWidth="120" />
+                                </columns>
+                            </SortableTableView>
+                        </VBox>
+                    </Tab>
+
+                    <Tab text="Bạn bè">
+                        <VBox spacing="10" styleClass="detail-tab-content">
+                            <Label text="Danh sách bạn bè trực tiếp"
+                                   styleClass="detail-card-title" />
+                            <SortableTableView fx:id="friendsTable"
+                                               prefHeight="350">
+                                <columns>
+                                    <TableColumn fx:id="friendUserColumn"
+                                                 text="NGƯỜI DÙNG"
+                                                 prefWidth="220" />
+                                    <TableColumn fx:id="friendEmailColumn"
+                                                 text="EMAIL"
+                                                 prefWidth="220" />
+                                    <TableColumn fx:id="friendSinceColumn"
+                                                 text="KẾT NỐI TỪ"
+                                                 prefWidth="130" />
+                                    <TableColumn fx:id="friendRelationColumn"
+                                                 text="QUAN HỆ"
+                                                 prefWidth="110" />
+                                </columns>
+                            </SortableTableView>
+                        </VBox>
+                    </Tab>
+                </tabs>
+
+            </TabPane>
+
+            <Region prefHeight="4" />
+        </VBox>
+    </content>
+</ScrollPane>
