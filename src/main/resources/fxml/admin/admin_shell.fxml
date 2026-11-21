@@ -258,25 +258,7 @@
             <!-- NƠI HIỂN THỊ CÁC TRANG -->
             <StackPane fx:id="contentHost"
                        styleClass="content-host"
-                       VBox.vgrow="ALWAYS">
-
-                <VBox alignment="CENTER"
-                      spacing="8"
-                      styleClass="empty-page">
-
-                    <FontIcon iconLiteral="fas-th-large"
-                              iconSize="32"
-                              styleClass="empty-page-icon"/>
-
-                    <Label text="Dashboard"
-                           styleClass="empty-page-title"/>
-
-                    <Label text="Nội dung Dashboard sẽ được xây dựng tại đây"
-                           styleClass="empty-page-description"/>
-
-                </VBox>
-
-            </StackPane>
+                       VBox.vgrow="ALWAYS" />
 
         </VBox>
     </center>

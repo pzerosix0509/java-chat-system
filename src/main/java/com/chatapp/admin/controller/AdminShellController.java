@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.chatapp.admin.dto.AdminProfile;
 import com.chatapp.admin.navigation.AdminNavigator;
+import com.chatapp.admin.navigation.AdminRoute;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -64,6 +66,10 @@ public class AdminShellController {
 
     private List<Button> navigationButtons;
 
+    private AdminProfile adminProfile;
+
+    private AdminDashboardController dashboardController;
+
     @FXML
     private void initialize() {
         navigationButtons = List.of(
@@ -77,63 +83,103 @@ public class AdminShellController {
             activeUsersButton
         );
 
-        activateMenu(dashboardButton, "Dashboard");
-
+        navigate(AdminRoute.DASHBOARD, dashboardButton);
     }
 
     @FXML
     private void showDashboard() {
-        activateMenu(dashboardButton, "Dashboard");
+        navigate(AdminRoute.DASHBOARD, dashboardButton);
     }
 
     @FXML
     private void showUsers() {
-        activateMenu(usersButton, "Quản lý người dùng");
+        navigate(AdminRoute.USERS, usersButton);
     }
 
     @FXML
     private void showLoginHistory() {
-        activateMenu(
-            loginHistoryButton,
-            "Lịch sử đăng nhập"
-        );
+        navigate(AdminRoute.LOGIN_HISTORY, loginHistoryButton);
     }
 
     @FXML
     private void showGroups() {
-        activateMenu(groupsButton, "Nhóm chat");
+        navigate(AdminRoute.GROUPS, groupsButton);
     }
 
     @FXML
     private void showSpamReports() {
-        activateMenu(
-            spamReportsButton,
-            "Báo cáo spam"
-        );
+        navigate(AdminRoute.SPAM_REPORTS, spamReportsButton);
     }
 
     @FXML
     private void showNewUsers() {
-        activateMenu(
-            newUsersButton,
-            "Người dùng đăng ký mới"
-        );
+        navigate(AdminRoute.NEW_USERS, newUsersButton);
     }
 
     @FXML
     private void showFriendRelations() {
-        activateMenu(
-            friendRelationsButton,
-            "Quan hệ bạn bè"
-        );
+        navigate(AdminRoute.FRIEND_COUNTS, friendRelationsButton);
     }
 
     @FXML
     private void showActiveUsers() {
-        activateMenu(
-            activeUsersButton,
-            "Người dùng hoạt động"
+        navigate(AdminRoute.ACTIVE_USERS, activeUsersButton);
+    }
+
+    private void navigate(
+        AdminRoute route,
+        Button selectedButton
+    ) {
+        try {
+            FXMLLoader loader = AdminNavigator.showRoute(
+                contentHost,
+                route
+            );
+
+            configureLoadedController(route, loader);
+            activateMenu(selectedButton, route.getTitle());
+        } catch (IOException exception) {
+            System.err.println(
+                "Không thể mở route: " + route.name()
+            );
+            exception.printStackTrace();
+        }
+    }
+
+    private void configureLoadedController(
+        AdminRoute route,
+        FXMLLoader loader
+    ) {
+        dashboardController = null;
+
+        if (route != AdminRoute.DASHBOARD) {
+            return;
+        }
+
+        dashboardController = loader.getController();
+        dashboardController.setNavigationHandler(
+            this::navigateFromDashboard
         );
+
+        if (adminProfile != null) {
+            dashboardController.setAdminProfile(adminProfile);
+        }
+    }
+
+    private void navigateFromDashboard(AdminRoute route) {
+        Button targetButton = switch (route) {
+            case USERS, USER_DETAIL -> usersButton;
+            case LOGIN_HISTORY -> loginHistoryButton;
+            case GROUPS, GROUP_DETAIL -> groupsButton;
+            case SPAM_REPORTS, SPAM_REPORT_DETAIL ->
+                spamReportsButton;
+            case NEW_USERS -> newUsersButton;
+            case FRIEND_COUNTS -> friendRelationsButton;
+            case ACTIVE_USERS -> activeUsersButton;
+            case DASHBOARD -> dashboardButton;
+        };
+
+        navigate(route, targetButton);
     }
 
     @FXML
@@ -172,6 +218,8 @@ public class AdminShellController {
     }
 
     public void setAdminProfile(AdminProfile profile) {
+        adminProfile = profile;
+
         adminInitialsLabel.setText(profile.avatarText());
         adminNameLabel.setText(profile.displayName());
         adminEmailLabel.setText(profile.email());
@@ -183,5 +231,9 @@ public class AdminShellController {
             profile.displayName()
         );
         topbarAdminRoleLabel.setText(profile.role());
+
+        if (dashboardController != null) {
+            dashboardController.setAdminProfile(profile);
+        }
     }
 }

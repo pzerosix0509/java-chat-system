@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml"
+           styleClass="route-page">
+    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
+        <FontIcon iconLiteral="fas-file-alt" iconSize="32" styleClass="empty-page-icon" />
+        <Label text="Chi tiết báo cáo spam" styleClass="empty-page-title" />
+        <Label text="Lý do, bằng chứng và khu vực xử lý báo cáo sẽ được xây dựng sau"
+               styleClass="empty-page-description" />
+    </VBox>
+</StackPane>
