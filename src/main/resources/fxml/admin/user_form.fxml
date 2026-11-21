@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.UserFormController"
+      spacing="14"
+      styleClass="user-form-root">
+
+    <Label fx:id="formDescriptionLabel"
+           wrapText="true"
+           styleClass="form-description" />
+
+    <Label fx:id="validationLabel"
+           visible="false"
+           managed="false"
+           wrapText="true"
+           styleClass="form-validation" />
+
+    <GridPane hgap="14"
+              vgap="12"
+              styleClass="user-form-grid">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints percentWidth="50" />
+        </columnConstraints>
+
+        <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="TÊN ĐĂNG NHẬP" styleClass="form-field-label" />
+            <TextField fx:id="usernameField"
+                       promptText="Nhập tên đăng nhập"
+                       styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="HỌ VÀ TÊN" styleClass="form-field-label" />
+            <TextField fx:id="fullNameField"
+                       promptText="Nhập họ và tên"
+                       styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="EMAIL" styleClass="form-field-label" />
+            <TextField fx:id="emailField"
+                       promptText="Nhập email"
+                       styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="ĐỊA CHỈ" styleClass="form-field-label" />
+            <TextField fx:id="addressField"
+                       promptText="Nhập địa chỉ"
+                       styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2">
+            <Label text="NGÀY SINH" styleClass="form-field-label" />
+            <DatePicker fx:id="birthDatePicker"
+                        maxWidth="Infinity"
+                        styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="GIỚI TÍNH" styleClass="form-field-label" />
+            <ComboBox fx:id="genderComboBox"
+                      maxWidth="Infinity"
+                      styleClass="form-input" />
+        </VBox>
+
+        <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="3">
+            <Label text="TRẠNG THÁI" styleClass="form-field-label" />
+            <ComboBox fx:id="statusComboBox"
+                      maxWidth="Infinity"
+                      styleClass="form-input" />
+        </VBox>
+    </GridPane>
+
+    <VBox fx:id="passwordSection"
+          spacing="12"
+          styleClass="form-password-section">
+        <Label text="THÔNG TIN ĐĂNG NHẬP"
+               styleClass="form-section-title" />
+
+        <GridPane hgap="14">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+
+            <VBox spacing="6" GridPane.columnIndex="0">
+                <Label text="MẬT KHẨU" styleClass="form-field-label" />
+                <PasswordField fx:id="passwordField"
+                               promptText="Tối thiểu 8 ký tự"
+                               styleClass="form-input" />
+            </VBox>
+
+            <VBox spacing="6" GridPane.columnIndex="1">
+                <Label text="XÁC NHẬN MẬT KHẨU"
+                       styleClass="form-field-label" />
+                <PasswordField fx:id="confirmPasswordField"
+                               promptText="Nhập lại mật khẩu"
+                               styleClass="form-input" />
+            </VBox>
+        </GridPane>
+    </VBox>
+
+</VBox>

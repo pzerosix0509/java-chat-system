@@ -80,6 +80,10 @@ public final class AdminNavigator {
         return loader;
     }
 
+    public static FXMLLoader createUserFormLoader() {
+        return createLoader("/fxml/admin/user_form.fxml");
+    }
+
     private static FXMLLoader createLoader(
         String fxmlPath
     ) {

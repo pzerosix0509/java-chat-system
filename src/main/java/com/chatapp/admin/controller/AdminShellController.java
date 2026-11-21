@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.chatapp.admin.dto.AdminProfile;
+import com.chatapp.admin.dto.UserRow;
 import com.chatapp.admin.navigation.AdminNavigator;
 import com.chatapp.admin.navigation.AdminRoute;
 
@@ -69,6 +70,8 @@ public class AdminShellController {
     private AdminProfile adminProfile;
 
     private AdminDashboardController dashboardController;
+
+    private UserRow selectedUser;
 
     @FXML
     private void initialize() {
@@ -152,18 +155,39 @@ public class AdminShellController {
     ) {
         dashboardController = null;
 
-        if (route != AdminRoute.DASHBOARD) {
+        if (route == AdminRoute.DASHBOARD) {
+            dashboardController = loader.getController();
+            dashboardController.setNavigationHandler(
+                this::navigateFromDashboard
+            );
+
+            if (adminProfile != null) {
+                dashboardController.setAdminProfile(adminProfile);
+            }
             return;
         }
 
-        dashboardController = loader.getController();
-        dashboardController.setNavigationHandler(
-            this::navigateFromDashboard
-        );
-
-        if (adminProfile != null) {
-            dashboardController.setAdminProfile(adminProfile);
+        if (route == AdminRoute.USERS) {
+            UserManagementController controller = loader.getController();
+            controller.setViewUserHandler(this::showUserDetail);
+            return;
         }
+
+        if (route == AdminRoute.USER_DETAIL) {
+            UserDetailController controller = loader.getController();
+            controller.setUser(selectedUser);
+            controller.setBackHandler(
+                () -> navigate(AdminRoute.USERS, usersButton)
+            );
+            controller.setDeletedHandler(
+                () -> navigate(AdminRoute.USERS, usersButton)
+            );
+        }
+    }
+
+    private void showUserDetail(UserRow user) {
+        selectedUser = user;
+        navigate(AdminRoute.USER_DETAIL, usersButton);
     }
 
     private void navigateFromDashboard(AdminRoute route) {

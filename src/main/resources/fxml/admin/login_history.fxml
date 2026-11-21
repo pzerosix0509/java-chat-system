@@ -1,16 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.chatapp.admin.component.FilterBar?>
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-sign-in-alt" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Lịch sử đăng nhập" styleClass="empty-page-title" />
-        <Label text="Danh sách đăng nhập theo thời gian sẽ được xây dựng ở bước tiếp theo"
-               styleClass="empty-page-description" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.LoginHistoryController"
+      spacing="14"
+      styleClass="admin-page">
+
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-heading">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Lịch sử đăng nhập" styleClass="page-heading-title" />
+            <Label text="Theo dõi hoạt động đăng nhập của toàn bộ người dùng."
+                   styleClass="page-heading-description" />
+        </VBox>
+        <!-- <FontIcon iconLiteral="fas-history" iconSize="22"
+                  styleClass="page-heading-icon" /> -->
+    </HBox>
+
+    <FilterBar>
+        <VBox spacing="6" HBox.hgrow="ALWAYS" styleClass="filter-field,filter-grow">
+            <Label text="TÌM KIẾM" styleClass="filter-label" />
+            <TextField fx:id="keywordField"
+                       promptText="Nhập username hoặc họ tên..."
+                       onAction="#applyFilters"
+                       styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="TỪ NGÀY" styleClass="filter-label" />
+            <DatePicker fx:id="fromDatePicker" prefWidth="145"
+                        styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="ĐẾN NGÀY" styleClass="filter-label" />
+            <DatePicker fx:id="toDatePicker" prefWidth="145"
+                        styleClass="filter-input" />
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Áp dụng" onAction="#applyFilters"
+                styleClass="button-primary,filter-button">
+            <graphic>
+                <FontIcon iconLiteral="fas-filter" iconSize="12" />
+            </graphic>
+        </Button>
+        <Button text="Đặt lại" onAction="#resetFilters"
+                styleClass="button-outline,filter-button" />
+    </FilterBar>
+
+    <Label fx:id="filterWarningLabel" visible="false" managed="false"
+           styleClass="filter-warning" />
+
+    <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+        <SortableTableView fx:id="loginHistoryTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="timeColumn" text="THỜI GIAN" prefWidth="170" />
+                <TableColumn fx:id="usernameColumn" text="USERNAME" prefWidth="135" />
+                <TableColumn fx:id="fullNameColumn" text="HỌ VÀ TÊN" prefWidth="155" />
+                <TableColumn fx:id="deviceColumn" text="THIẾT BỊ" prefWidth="190" />
+                <TableColumn fx:id="ipColumn" text="ĐỊA CHỈ IP" prefWidth="135" />
+                <TableColumn fx:id="resultColumn" text="KẾT QUẢ" prefWidth="125" />
+            </columns>
+        </SortableTableView>
+        <HBox alignment="CENTER_LEFT" spacing="8" styleClass="table-pagination">
+            <Label fx:id="paginationLabel" styleClass="pagination-copy" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button text="‹" styleClass="pagination-button" />
+            <Button text="1" styleClass="pagination-button,pagination-active" />
+            <Button text="2" styleClass="pagination-button" />
+            <Button text="3" styleClass="pagination-button" />
+            <Button text="›" styleClass="pagination-button" />
+        </HBox>
     </VBox>
-</StackPane>
+</VBox>
