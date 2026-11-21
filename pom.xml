@@ -17,6 +17,8 @@
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <javafx.version>21</javafx.version>
+    <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
+    <ikonli.version>12.3.1</ikonli.version>
   </properties>
 
   <!--
@@ -31,9 +33,82 @@
       - maven-shade-plugin (tao 2 jar cho admin/user, co Main-Class rieng)
   -->
   <dependencies>
+    <!--
+        Chứa các thành phần giao diện JavaFX:
+        Button, Label, TextField, TableView,
+        LineChart, BarChart, TabPane...
+    -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+
+    <!--
+        Cho phép dùng FXMLLoader để đọc
+        các file giao diện .fxml
+    -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>${javafx.version}</version>
+    </dependency>
+
+    <!-- Icon vector -->
+    
+    <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-javafx</artifactId>
+      <version>${ikonli.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.kordamp.ikonli</groupId>
+      <artifactId>ikonli-fontawesome5-pack</artifactId>
+      <version>${ikonli.version}</version>
+    </dependency>
   </dependencies>
 
   <build>
     <finalName>${project.artifactId}</finalName>
+    <plugins>
+    <!--
+        Plugin giúp Maven khởi động
+        ứng dụng JavaFX.
+    -->
+      <plugin>
+        <groupId>org.openjfx</groupId>
+        <artifactId>javafx-maven-plugin</artifactId>
+        <version>${javafx.maven.plugin.version}</version>
+        <configuration>
+          <mainClass>${app.mainClass}</mainClass>
+        </configuration>
+      </plugin>
+
+    </plugins>
   </build>
+
+
+  <!--
+      Tách cấu hình chạy Admin và User,
+      tránh phải sửa pom.xml mỗi lần chạy.
+  -->
+  <profiles>
+  <!-- Chạy phân hệ Admin -->
+    <profile>
+      <id>admin-ui</id>
+      <properties>
+        <app.mainClass>com.chatapp.admin.AdminApp</app.mainClass>
+      </properties>
+    </profile>
+
+    <!-- Chạy phân hệ Admin -->
+    <profile>
+      <id>user-ui</id>
+      <properties>
+        <app.mainClass>com.chatapp.user.UserApp</app.mainClass>
+      </properties>
+    </profile>
+  </profiles>
+  
 </project>

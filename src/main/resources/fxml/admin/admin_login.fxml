@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.AdminLoginController"
+      styleClass="admin-login-root"
+      prefWidth="1280"
+      prefHeight="760">
+
+    <StackPane styleClass="login-brand-panel"
+               prefWidth="520"
+               maxWidth="Infinity"
+               HBox.hgrow="ALWAYS">
+
+        <VBox styleClass="login-brand-content"
+              alignment="CENTER_LEFT"
+              spacing="14">
+
+            <Label text="MyBrand Admin"
+                   styleClass="login-brand-title" />
+
+            <Label text="Quản lý người dùng, nhóm chat, báo cáo spam và hoạt động hệ thống tại một nơi."
+                   wrapText="true"
+                   styleClass="login-brand-description" />
+
+            <Label text="HỆ THỐNG QUẢN TRỊ"
+                   styleClass="login-brand-pill" />
+
+        </VBox>
+
+    </StackPane>
+
+    <StackPane styleClass="login-form-panel"
+               prefWidth="520"
+               maxWidth="Infinity"
+               HBox.hgrow="ALWAYS">
+
+        <VBox styleClass="login-form"
+              alignment="CENTER_LEFT"
+              spacing="9">
+
+            <Label text="Chào mừng quản trị viên!"
+                   styleClass="login-form-title" />
+
+            <Label text="Đăng nhập để tiếp tục quản lý hệ thống."
+                   wrapText="true"
+                   styleClass="login-form-subtitle" />
+
+            <Label fx:id="errorLabel"
+                   text=""
+                   visible="false"
+                   managed="false"
+                   wrapText="true"
+                   maxWidth="Infinity"
+                   styleClass="login-error" />
+
+            <Label text="Tên đăng nhập"
+                   styleClass="login-field-label" />
+
+            <TextField fx:id="usernameField"
+                       promptText="Nhập tên đăng nhập"
+                       maxWidth="Infinity"
+                       styleClass="login-input" />
+
+            <Label text="Mật khẩu"
+                   styleClass="login-field-label" />
+
+            <StackPane styleClass="login-password-wrapper"
+                       maxWidth="Infinity">
+
+                <PasswordField fx:id="passwordField"
+                               promptText="Nhập mật khẩu"
+                               onAction="#handleLogin"
+                               maxWidth="Infinity"
+                               styleClass="login-input,password-input" />
+
+                <TextField fx:id="visiblePasswordField"
+                           promptText="Nhập mật khẩu"
+                           onAction="#handleLogin"
+                           visible="false"
+                           managed="false"
+                           maxWidth="Infinity"
+                           styleClass="login-input,password-input" />
+
+                <Button fx:id="passwordVisibilityButton"
+                        onAction="#togglePasswordVisibility"
+                        accessibleText="Hiện mật khẩu"
+                        focusTraversable="false"
+                        StackPane.alignment="CENTER_RIGHT"
+                        styleClass="password-visibility-button">
+
+                    <graphic>
+                        <FontIcon fx:id="passwordVisibilityIcon"
+                                  iconLiteral="fas-eye"
+                                  iconSize="14" />
+                    </graphic>
+
+                </Button>
+
+            </StackPane>
+
+            <Hyperlink text="Quên mật khẩu?"
+                       onAction="#handleForgotPassword"
+                       styleClass="login-forgot-link" />
+
+            <HBox alignment="CENTER"
+                  maxWidth="Infinity">
+
+                <Button fx:id="loginButton"
+                        text="Đăng nhập"
+                        onAction="#handleLogin"
+                        defaultButton="true"
+                        prefWidth="170"
+                        styleClass="login-submit-button" />
+
+            </HBox>
+
+        </VBox>
+
+    </StackPane>
+
+</HBox>
