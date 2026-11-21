@@ -1,16 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-users" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Chi tiết nhóm chat" styleClass="empty-page-title" />
-        <Label text="Danh sách thành viên và quản trị viên nhóm sẽ được xây dựng sau"
-               styleClass="empty-page-description" />
-    </VBox>
-</StackPane>
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chatapp.admin.controller.GroupDetailController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            styleClass="detail-scroll">
+    <content>
+        <VBox spacing="14" styleClass="admin-page,group-detail-page">
+            <Button text="Danh sách nhóm"
+                    onAction="#goBack"
+                    styleClass="button-outline,detail-back-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-arrow-left" iconSize="13" />
+                </graphic>
+            </Button>
+
+            <GridPane hgap="16" styleClass="group-detail-layout">
+                <columnConstraints>
+                    <ColumnConstraints minWidth="250" prefWidth="290" />
+                    <ColumnConstraints hgrow="ALWAYS" minWidth="0" />
+                </columnConstraints>
+
+                <VBox spacing="14"
+                      GridPane.columnIndex="0"
+                      styleClass="group-summary-card">
+                    <VBox alignment="CENTER" spacing="10" styleClass="group-summary-identity">
+                        <Label fx:id="groupInitialsLabel" styleClass="group-hero-icon" />
+                        <Label fx:id="groupNameLabel"
+                               wrapText="true"
+                               styleClass="group-summary-name" />
+                        <Label fx:id="groupCodeLabel" styleClass="group-summary-code" />
+                    </VBox>
+
+                    <VBox spacing="9" styleClass="group-summary-meta">
+                        <VBox spacing="3">
+                            <Label text="NGƯỜI TẠO" styleClass="group-summary-label" />
+                            <Label fx:id="creatorLabel" styleClass="group-summary-value" />
+                        </VBox>
+                        <VBox spacing="3">
+                            <Label text="THỜI GIAN TẠO" styleClass="group-summary-label" />
+                            <Label fx:id="createdAtLabel" styleClass="group-summary-value" />
+                        </VBox>
+                    </VBox>
+
+                    <HBox spacing="9" styleClass="group-metrics">
+                        <VBox spacing="5" HBox.hgrow="ALWAYS" styleClass="group-metric-card">
+                            <Label text="Thành viên" styleClass="group-metric-label" />
+                            <Label fx:id="memberCountLabel" styleClass="group-metric-value" />
+                        </VBox>
+                        <VBox spacing="5" HBox.hgrow="ALWAYS" styleClass="group-metric-card">
+                            <Label text="Quản trị viên" styleClass="group-metric-label" />
+                            <Label fx:id="adminCountLabel" styleClass="group-metric-value" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <TabPane GridPane.columnIndex="1"
+                         tabClosingPolicy="UNAVAILABLE"
+                         styleClass="group-detail-tabs">
+                    <tabs>
+                        <Tab text="Thành viên">
+                            <VBox spacing="10" styleClass="group-tab-content">
+                                <Label text="Danh sách thành viên trong nhóm"
+                                       styleClass="detail-card-title" />
+                                <SortableTableView fx:id="membersTable" prefHeight="430">
+                                    <columns>
+                                        <TableColumn fx:id="memberUserColumn" text="NGƯỜI DÙNG" prefWidth="205" />
+                                        <TableColumn fx:id="memberEmailColumn" text="EMAIL" prefWidth="190" />
+                                        <TableColumn fx:id="memberJoinedColumn" text="NGÀY THAM GIA" prefWidth="130" />
+                                        <TableColumn fx:id="memberRoleColumn" text="VAI TRÒ" prefWidth="125" />
+                                    </columns>
+                                </SortableTableView>
+                            </VBox>
+                        </Tab>
+                        <Tab text="Quản trị viên">
+                            <VBox spacing="10" styleClass="group-tab-content">
+                                <Label text="Danh sách quản trị viên của nhóm"
+                                       styleClass="detail-card-title" />
+                                <SortableTableView fx:id="adminsTable" prefHeight="430">
+                                    <columns>
+                                        <TableColumn fx:id="adminUserColumn" text="NGƯỜI DÙNG" prefWidth="205" />
+                                        <TableColumn fx:id="adminEmailColumn" text="EMAIL" prefWidth="190" />
+                                        <TableColumn fx:id="adminJoinedColumn" text="NGÀY THAM GIA" prefWidth="130" />
+                                        <TableColumn fx:id="adminRoleColumn" text="VAI TRÒ" prefWidth="125" />
+                                    </columns>
+                                </SortableTableView>
+                            </VBox>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </GridPane>
+            <Region prefHeight="4" />
+        </VBox>
+    </content>
+</ScrollPane>

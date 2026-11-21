@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.chatapp.admin.dto.AdminProfile;
+import com.chatapp.admin.dto.GroupRow;
 import com.chatapp.admin.dto.UserRow;
 import com.chatapp.admin.navigation.AdminNavigator;
 import com.chatapp.admin.navigation.AdminRoute;
@@ -72,6 +73,8 @@ public class AdminShellController {
     private AdminDashboardController dashboardController;
 
     private UserRow selectedUser;
+
+    private GroupRow selectedGroup;
 
     @FXML
     private void initialize() {
@@ -182,12 +185,32 @@ public class AdminShellController {
             controller.setDeletedHandler(
                 () -> navigate(AdminRoute.USERS, usersButton)
             );
+            return;
+        }
+
+        if (route == AdminRoute.GROUPS) {
+            GroupListController controller = loader.getController();
+            controller.setViewGroupHandler(this::showGroupDetail);
+            return;
+        }
+
+        if (route == AdminRoute.GROUP_DETAIL) {
+            GroupDetailController controller = loader.getController();
+            controller.setGroup(selectedGroup);
+            controller.setBackHandler(
+                () -> navigate(AdminRoute.GROUPS, groupsButton)
+            );
         }
     }
 
     private void showUserDetail(UserRow user) {
         selectedUser = user;
         navigate(AdminRoute.USER_DETAIL, usersButton);
+    }
+
+    private void showGroupDetail(GroupRow group) {
+        selectedGroup = group;
+        navigate(AdminRoute.GROUP_DETAIL, groupsButton);
     }
 
     private void navigateFromDashboard(AdminRoute route) {
