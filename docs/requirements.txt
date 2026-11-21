@@ -1,0 +1,131 @@
+Lập trình ứng dụng Java
+Đồ án cuối kỳ
+Hệ thống chat
+BM. Công nghệ phần mềm – Khoa. Công nghệ thông tin
+Đồ án cuối kỳ
+Lập trình ứng dụng Java
+1 Mô tả hệ thống
+Hệ thống gồm 2 phân hệ dành cho người quản trị và người sử dụng.
+Phân hệ dành cho người quản trị
+1. Quản lý danh sách người dùng. Thông tin người dùng gồm: tên đăng nhập, họ tên, địa chỉ, ngày
+sinh, giới tính, email
+a. Xem danh sách cho phép lọc theo tên/tên đăng nhập/trạng thái, sắp xếp theo tên/ngày tạo
+b. Thêm/cập nhật/xoá
+c. Khoá/mở khóa tài khoản
+d. Cập nhật mật khẩu
+e. Xem lịch sử đăng nhập
+f. Danh sách bạn bè
+2. Xem danh sách đăng nhập theo thứ tự thời gian. Thông tin gồm: thời gian, tên đăng nhập, họ tên.
+3. Xem danh sách các nhóm chat
+a. Sắp xếp theo tên/thời gian tạo
+b. Lọc theo tên
+c. Xem danh sách thành viên 1 nhóm
+d. Xem danh sách admin 1 nhóm
+4. Xem danh sách báo cáo spam
+a. Sắp xếp theo thời gian/tên đăng nhập
+b. Lọc theo thời gian
+c. Lọc theo tên đăng nhập
+d. Khóa tài khoản người dùng
+5. Xem danh sách người dùng đăng ký mới: chọn khoảng thời gian, hiện ra danh sách người dùng
+đăng ký mới
+a. Sắp xếp theo tên/thời gian tạo
+b. Lọc theo tên
+6. Biểu đồ số lượng người đăng ký mới theo năm: chọn năm, vẽ biểu đồ với trục hoành là tháng,
+trục tung là số lượng người đăng ký mới.
+7. Xem danh sách người dùng và số lượng bạn bè (1 cột bạn bè trực tiếp, 1 cột tính luôn số lượng
+bạn của bạn)
+a. Sắp xếp theo tên/thời gian tạo
+b. Lọc theo tên
+c. Lọc theo số lượng bạn trực tiếp (bằng, nhỏ hơn, lớn hơn 1 số được nhập).
+8. Xem danh sách người dùng hoạt động: chọn khoảng thời gian, hiện ra danh sách người dùng có
+hoạt đặng và các số liệu (mở ứng dụng, chat với bao nhiêu người, chat bao nhiêu nhóm)
+a. Sắp xếp theo tên/thời gian tạo
+b. Lọc theo tên
+c. Lọc theo số lượng hoạt động (bằng, nhỏ hơn, lớn hơn 1 số được nhập).
+9. Biểu đồ số lượng người hoạt động theo năm: chọn năm, vẽ biểu đồ với trục hoành là tháng, trục
+tung là số lượng người có mở ứng dụng.
+2
+Đồ án cuối kỳ
+Lập trình ứng dụng Java
+Phân hệ dành cho người sử dụng
+1. Đăng ký tài khoản.
+2. Cập nhật thông tin tài khoản
+3. Khởi tạo lại mật khẩu: mật khẩu sẽ được random và gởi tới email.
+4. Cập nhật mật khẩu
+5. Đăng nhập.
+6. Danh sách bạn bè:
+a. Hiển thị danh sách và cho lọc theo tên (cho thấy trạng thái online/offline)
+b. Tìm theo tên và yêu cầu kết bạn
+c. Huỷ kết bạn
+d. Block tài khoản và hủy kết bạn (người đó sẽ không thể yêu cầu kết bạn lại được)
+7. Danh sách yêu cầu kết bạn
+a. Hiển thị danh sách và cho lọc theo tên
+b. Đồng ý/từ chối kết bạn
+8. Danh sách bạn bè đang online: cho lọc theo tên, có thể chat, tạo group
+9. Tìm người dựa vào tên đăng nhập hoặc tên (không thấy người block mình). Sau đó có thể chat,
+tạo group
+10. Báo cáo spam khi người đó chat với mình và mình không thích.
+11. Chat
+a. Nếu bạn đang online thì phải thấy phản hồi thời gian thực
+b. Nếu bạn đang offline thì gởi tin nhắn bạn xem sau
+c. Xem được lịch sử chat
+d. Xoá toàn bộ lịch sử chat
+e. Xóa 1 hoặc vài dòng trong lịch sử chat
+f. Tìm kiếm chuỗi trong lịch sử chat với 1 người, có thể di chuyển đến đoạn chat đó
+g. Tìm kiếm chuỗi trong lịch sử chat với tất cả mọi người, có thể di chuyển đến đoạn chat đang
+tìm
+h. Gọi LLM để chỉnh hoặc gợi ý chat cho người dùng.
+12. Nhóm chat
+a. Tạo nhóm: khi tạo cho thêm tối thiểu 1 tên đăng nhập
+b. Đổi tên nhóm chat
+c. Thêm thành viên
+d. Gán quyền admin nhóm cho thành viên
+e. Xoá thành viên: chỉ admin mới được quyền xoá
+f. Chat
+g. Mã hóa nhóm (tham khảo tính năng nhóm chat được mã hóa của facebook)
+3
+Đồ án cuối kỳ
+Lập trình ứng dụng Java
+1 Yêu cầu chung - - - - -
+Nhóm sinh viên phải sử dụng git để quản lý mã nguồn. Thành viên nào không có commit thì sẽ
+0đ.
+Nhóm sinh viên nộp lại tất cả mã nguồn của 2 phân hệ.
+Nhóm sinh viên nộp lại script tạo cơ sở dữ liệu.
+Cấu trúc tập tin nén không đúng sẽ 0đ.
+Tập tin báo cáo không đủ nội dung như yêu cầu sẽ 0đ.
+2 Deadlines
+• Phiên bản 1 (20%)
+Giao diện và cơ sở dữ liệu. Nhóm sinh viên tập tin nén bao gồm các phần sau - - - -
+Thư mục src: mã nguồn các màn hình của 2 phân hệ (chỉ cần giao diện, chưa cần lập trình sự
+kiện)
+Thư mục script: chứa script tạo cơ sở dữ liệu
+Thư mục git: chứa hình ảnh các commit của từng thành viên
+Tập tin báo cáo gồm các nội dung:
+o Thông tin nhóm
+o Danh sách công việc từng thành viên
+o Bảng đóng góp từng thành viên (tổng là 100)
+o Thiết kế cơ sở dữ liệu của hệ thống
+o Danh sách các màn hình đã thiết kế (có hình chụp)
+• Phiên bản 2 (80%)
+Toàn bộ hệ thống. Nhóm sinh viên nộp tập tin nén bao gồm các phần sau - - - - -
+Thư mục src: mã nguồn chạy được của 2 phân hệ
+Thư mục release: ít nhất 2 tập tin jar (quản lý, người dùng) và 1 tập tin cấu hình (lưu thông tin
+kết nối cơ sở dữ liệu, chỉ cần sửa thông tin trong file là chạy được jar)
+Thư mục script: chứa script tạo cơ sở dữ liệu
+Thư mục git: chứa hình ảnh các commit của từng thành viên
+Tập tin báo cáo gồm các nội dung sau:
+o Thông tin nhóm
+o Danh sách công việc từng thành viên
+o Bảng đóng góp từng thành viên (tổng là 100)
+o Các chức năng và kỹ thuật nhóm tự đánh giá là hay, nổi bật, hay làm thêm ngoài yêu
+cầu
+o Thiết kế của hệ thống
+4
+Đồ án cuối kỳ
+Lập trình ứng dụng Java
+o Thiết kế cơ sở dữ liệu của hệ thống
+o Hướng dẫn sử dụng (có hình)
+o Link youtube demo chức năng
+o Link github (khi cần thầy sẽ yêu cầu xem) -
+Báo cáo tự đánh giá: (theo mẫu, không có 0đ)
+5

@@ -47,12 +47,35 @@ Cả phân hệ quản trị và phân hệ người dùng dùng chung một CSD
 10. **Thống kê hoạt động:** truy vấn mẫu định nghĩa `app_open_count` là số phiên bắt đầu trong khoảng; `people_chatted_with` là số người chat trực tiếp phân biệt; `groups_chatted_in` là số nhóm có tin nhắn trong khoảng; `activity_count = app_open_count + messages_sent`. Có thể đổi công thức theo định nghĩa KPI của giảng viên.
 11. **LLM:** không cần lưu toàn bộ prompt/response để thực hiện chức năng. Nếu cần audit, chỉ lưu metadata/token; nếu lưu nội dung, cần chính sách riêng về quyền riêng tư và thời hạn lưu.
 
-## 5. Cách chạy
+## 5. Cấu trúc script và cách chạy
 
-1. Mở MySQL Workbench hoặc CLI.
-2. Chạy toàn bộ file `chat_app_schema_mysql8.sql`.
-3. Kết nối Java bằng JDBC và dùng `PreparedStatement` cho mọi tham số.
-4. Các câu SQL ví dụ cho từng chức năng admin/user được đặt ở cuối file dưới dạng comment để tham khảo và chuyển thành repository/DAO.
+Schema được tách theo dependency và thứ tự triển khai:
+
+| File | Nội dung |
+|---|---|
+| `schema/00_database.sql` | Tạo database và chọn schema |
+| `schema/10_users_auth.sql` | Người dùng, role, reset password, login/session |
+| `schema/20_social.sql` | Bạn bè, yêu cầu kết bạn, block |
+| `schema/30_conversations.sql` | Conversation, direct chat, group, members, key envelope |
+| `schema/40_messages.sql` | Messages và xóa lịch sử theo user |
+| `schema/50_reports_and_llm.sql` | Spam report và LLM audit |
+| `schema/60_views.sql` | View phục vụ thống kê |
+
+Chạy toàn bộ bằng MySQL CLI từ thư mục `database/sql`:
+
+```text
+mysql -u <user> -p < chat_app_schema.sql
+```
+
+Hoặc trong MySQL CLI:
+
+```text
+SOURCE chat_app_schema.sql;
+```
+
+Có thể chạy từng file theo thứ tự số nếu cần migration/debug. Các file dùng `IF NOT EXISTS` (và view dùng `CREATE OR REPLACE`) nên có thể chạy lại an toàn trong môi trường phát triển.
+
+Kết nối Java bằng JDBC và dùng `PreparedStatement` cho mọi tham số. Các câu SQL nghiệp vụ nên đặt trong repository/DAO, không trộn vào DDL.
 
 ## 6. Những điểm tầng Java phải kiểm tra
 
