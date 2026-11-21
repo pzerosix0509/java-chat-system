@@ -1,5 +1,3 @@
-USE chat_app_db;
-
 CREATE OR REPLACE VIEW v_user_friend_counts AS
 SELECT
     u.user_id,
