@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.chatapp.admin.component.ChartPane?>
+<?import com.chatapp.admin.component.MetricCard?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<ScrollPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chatapp.admin.controller.AdminDashboardController"
+            fitToWidth="true"
+            hbarPolicy="NEVER"
+            vbarPolicy="AS_NEEDED"
+            pannable="true"
+            styleClass="dashboard-scroll">
+
+    <content>
+        <VBox spacing="18"
+              fillWidth="true"
+              styleClass="dashboard-page">
+
+            <HBox alignment="CENTER_LEFT"
+                  spacing="20"
+                  styleClass="dashboard-hero">
+
+                <VBox spacing="5"
+                      HBox.hgrow="ALWAYS">
+                    <Label text="MYBRAND ADMIN"
+                           styleClass="dashboard-hero-eyebrow" />
+                    <Label fx:id="heroGreetingLabel"
+                           styleClass="dashboard-hero-title" />
+                    <Label text="Theo dõi người dùng, nhóm chat và an toàn cộng đồng từ một không gian quản trị thống nhất."
+                           wrapText="true"
+                           styleClass="dashboard-hero-description" />
+                </VBox>
+
+                <Label fx:id="heroDateLabel"
+                       styleClass="dashboard-hero-date" />
+
+            </HBox>
+
+            <HBox spacing="15"
+                  fillHeight="true"
+                  styleClass="dashboard-metrics">
+
+                <MetricCard fx:id="totalUsersCard"
+                            minWidth="0"
+                            HBox.hgrow="ALWAYS" />
+                <MetricCard fx:id="activeUsersCard"
+                            minWidth="0"
+                            HBox.hgrow="ALWAYS" />
+                <MetricCard fx:id="groupsCard"
+                            minWidth="0"
+                            HBox.hgrow="ALWAYS" />
+                <MetricCard fx:id="pendingReportsCard"
+                            minWidth="0"
+                            HBox.hgrow="ALWAYS" />
+
+            </HBox>
+
+            <HBox spacing="18"
+                  fillHeight="true"
+                  styleClass="dashboard-charts">
+
+                <ChartPane fx:id="registrationChartPane"
+                           minWidth="0"
+                           HBox.hgrow="ALWAYS" />
+
+                <ChartPane fx:id="activityChartPane"
+                           minWidth="0"
+                           HBox.hgrow="ALWAYS" />
+
+            </HBox>
+
+            <HBox spacing="18"
+                  fillHeight="true"
+                  styleClass="dashboard-lists">
+
+                <VBox minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      styleClass="dashboard-card,dashboard-list-card">
+
+                    <HBox alignment="CENTER_LEFT"
+                          spacing="12"
+                          styleClass="dashboard-card-header">
+                        <VBox spacing="3"
+                              HBox.hgrow="ALWAYS">
+                            <Label text="Người dùng gần đây"
+                                   styleClass="dashboard-card-title" />
+                            <Label text="Tài khoản vừa có hoạt động"
+                                   styleClass="dashboard-card-description" />
+                        </VBox>
+
+                        <Button text="Xem tất cả"
+                                onAction="#showAllUsers"
+                                styleClass="dashboard-view-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-arrow-right"
+                                          iconSize="12" />
+                            </graphic>
+                        </Button>
+                    </HBox>
+
+                    <VBox fx:id="recentUsersList"
+                          styleClass="dashboard-user-list" />
+
+                </VBox>
+
+                <VBox minWidth="0"
+                      HBox.hgrow="ALWAYS"
+                      styleClass="dashboard-card,dashboard-list-card">
+
+                    <HBox alignment="CENTER_LEFT"
+                          spacing="12"
+                          styleClass="dashboard-card-header">
+                        <VBox spacing="3"
+                              HBox.hgrow="ALWAYS">
+                            <Label text="Người dùng mới"
+                                   styleClass="dashboard-card-title" />
+                            <Label text="Đăng ký gần nhất trong tháng"
+                                   styleClass="dashboard-card-description" />
+                        </VBox>
+
+                        <Button text="Xem tất cả"
+                                onAction="#showAllNewUsers"
+                                styleClass="dashboard-view-button">
+                            <graphic>
+                                <FontIcon iconLiteral="fas-arrow-right"
+                                          iconSize="12" />
+                            </graphic>
+                        </Button>
+                    </HBox>
+
+                    <VBox fx:id="newUsersList"
+                          styleClass="dashboard-user-list" />
+
+                </VBox>
+
+            </HBox>
+
+            <Region prefHeight="4" />
+
+        </VBox>
+    </content>
+
+</ScrollPane>

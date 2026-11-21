@@ -10,6 +10,7 @@ import com.chatapp.admin.dto.AdminProfile;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public final class AdminNavigator {
@@ -53,6 +54,30 @@ public final class AdminNavigator {
         controller.setAdminProfile(profile);
 
         setScene(stage, root, "MyBrand Admin");
+    }
+
+    public static FXMLLoader showRoute(
+        StackPane contentHost,
+        AdminRoute route
+    ) throws IOException {
+
+        Objects.requireNonNull(
+            contentHost,
+            "contentHost không được null"
+        );
+        Objects.requireNonNull(
+            route,
+            "AdminRoute không được null"
+        );
+
+        FXMLLoader loader = createLoader(
+            route.getFxmlPath()
+        );
+
+        Parent page = loader.load();
+        contentHost.getChildren().setAll(page);
+
+        return loader;
     }
 
     private static FXMLLoader createLoader(
