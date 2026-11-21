@@ -1,16 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.chatapp.admin.component.FilterBar?>
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-comments" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Nhóm chat" styleClass="empty-page-title" />
-        <Label text="Danh sách và bộ lọc nhóm chat sẽ được xây dựng ở bước tiếp theo"
-               styleClass="empty-page-description" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.GroupListController"
+      spacing="14"
+      styleClass="admin-page">
+
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-heading">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Danh sách nhóm chat" styleClass="page-heading-title" />
+            <Label text="Xem thành viên và quản trị viên của từng nhóm."
+                   styleClass="page-heading-description" />
+        </VBox>
+    </HBox>
+
+    <FilterBar>
+        <VBox spacing="6" HBox.hgrow="ALWAYS" styleClass="filter-field,filter-grow">
+            <Label text="TÌM KIẾM" styleClass="filter-label" />
+            <TextField fx:id="keywordField"
+                       promptText="Nhập tên nhóm..."
+                       onAction="#applyFilters"
+                       styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="SẮP XẾP" styleClass="filter-label" />
+            <ComboBox fx:id="sortFieldFilter"
+                      prefWidth="165"
+                      styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="THỨ TỰ" styleClass="filter-label" />
+            <ComboBox fx:id="sortDirectionFilter"
+                      prefWidth="125"
+                      styleClass="filter-input" />
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Áp dụng"
+                onAction="#applyFilters"
+                styleClass="button-primary,filter-button" />
+        <Button text="Đặt lại"
+                onAction="#resetFilters"
+                styleClass="button-outline,filter-button" />
+    </FilterBar>
+
+    <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+        <SortableTableView fx:id="groupsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="groupColumn" text="NHÓM CHAT" prefWidth="245" />
+                <TableColumn fx:id="creatorColumn" text="NGƯỜI TẠO" prefWidth="175" />
+                <TableColumn fx:id="createdAtColumn" text="THỜI GIAN TẠO" prefWidth="155" />
+                <TableColumn fx:id="memberCountColumn" text="THÀNH VIÊN" prefWidth="120" />
+                <TableColumn fx:id="adminCountColumn" text="ADMIN" prefWidth="90" />
+                <TableColumn fx:id="actionColumn" text="THAO TÁC" prefWidth="125" sortable="false" />
+            </columns>
+        </SortableTableView>
     </VBox>
-</StackPane>
+</VBox>
