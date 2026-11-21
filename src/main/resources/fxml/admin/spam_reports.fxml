@@ -1,16 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.chatapp.admin.component.FilterBar?>
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-shield-alt" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Báo cáo spam" styleClass="empty-page-title" />
-        <Label text="Danh sách báo cáo và trạng thái xử lý sẽ được xây dựng ở bước tiếp theo"
-               styleClass="empty-page-description" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.SpamReportsController"
+      spacing="14"
+      styleClass="admin-page">
+
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-heading">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Báo cáo spam" styleClass="page-heading-title" />
+            <Label text="Mọi quyết định xử lý chỉ được thực hiện trong trang chi tiết báo cáo."
+                   styleClass="page-heading-description" />
+        </VBox>
+    </HBox>
+
+    <FilterBar>
+        <VBox spacing="6" HBox.hgrow="ALWAYS" styleClass="filter-field,filter-grow">
+            <Label text="TÌM KIẾM" styleClass="filter-label" />
+            <TextField fx:id="keywordField"
+                       promptText="Tìm người báo cáo hoặc người bị báo cáo..."
+                       onAction="#applyFilters"
+                       styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="TỪ NGÀY" styleClass="filter-label" />
+            <DatePicker fx:id="fromDatePicker" prefWidth="145"
+                        styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="ĐẾN NGÀY" styleClass="filter-label" />
+            <DatePicker fx:id="toDatePicker" prefWidth="145"
+                        styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="TRẠNG THÁI" styleClass="filter-label" />
+            <ComboBox fx:id="statusFilter" prefWidth="145"
+                      styleClass="filter-input" />
+        </VBox>
+        <VBox spacing="6" styleClass="filter-field">
+            <Label text="SẮP XẾP" styleClass="filter-label" />
+            <ComboBox fx:id="sortFilter" prefWidth="155"
+                      styleClass="filter-input" />
+        </VBox>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button text="Áp dụng" onAction="#applyFilters"
+                styleClass="button-primary,filter-button">
+            <graphic>
+                <FontIcon iconLiteral="fas-filter" iconSize="12" />
+            </graphic>
+        </Button>
+        <Button text="Đặt lại" onAction="#resetFilters"
+                styleClass="button-outline,filter-button" />
+    </FilterBar>
+
+    <Label fx:id="filterWarningLabel"
+           visible="false"
+           managed="false"
+           styleClass="filter-warning" />
+
+    <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+        <SortableTableView fx:id="reportsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="timeColumn" text="THỜI GIAN" prefWidth="150" />
+                <TableColumn fx:id="reporterColumn" text="NGƯỜI BÁO CÁO" prefWidth="190" />
+                <TableColumn fx:id="accusedColumn" text="NGƯỜI BỊ BÁO CÁO" prefWidth="190" />
+                <TableColumn fx:id="reasonColumn" text="LÝ DO" prefWidth="210" />
+                <TableColumn fx:id="statusColumn" text="TRẠNG THÁI" prefWidth="135" />
+                <TableColumn fx:id="detailColumn" text="THAO TÁC" prefWidth="145" sortable="false" />
+            </columns>
+        </SortableTableView>
     </VBox>
-</StackPane>
+</VBox>

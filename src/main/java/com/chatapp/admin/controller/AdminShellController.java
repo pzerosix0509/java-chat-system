@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.chatapp.admin.dto.AdminProfile;
 import com.chatapp.admin.dto.GroupRow;
+import com.chatapp.admin.dto.SpamReportRow;
 import com.chatapp.admin.dto.UserRow;
 import com.chatapp.admin.navigation.AdminNavigator;
 import com.chatapp.admin.navigation.AdminRoute;
@@ -14,6 +15,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 import javafx.stage.Stage;
 
 public class AdminShellController {
@@ -75,6 +79,12 @@ public class AdminShellController {
     private UserRow selectedUser;
 
     private GroupRow selectedGroup;
+
+    private SpamReportRow selectedSpamReport;
+
+    private Label toastLabel;
+
+    private PauseTransition toastTimer;
 
     @FXML
     private void initialize() {
@@ -200,6 +210,23 @@ public class AdminShellController {
             controller.setBackHandler(
                 () -> navigate(AdminRoute.GROUPS, groupsButton)
             );
+            return;
+        }
+
+        if (route == AdminRoute.SPAM_REPORTS) {
+            SpamReportsController controller = loader.getController();
+            controller.setViewReportHandler(this::showSpamReportDetail);
+            return;
+        }
+
+        if (route == AdminRoute.SPAM_REPORT_DETAIL) {
+            SpamReportDetailController controller = loader.getController();
+            controller.setReport(selectedSpamReport);
+            controller.setBackHandler(
+                () -> navigate(AdminRoute.SPAM_REPORTS, spamReportsButton)
+            );
+            controller.setToastHandler(this::showToast);
+            installToastNode();
         }
     }
 
@@ -211,6 +238,47 @@ public class AdminShellController {
     private void showGroupDetail(GroupRow group) {
         selectedGroup = group;
         navigate(AdminRoute.GROUP_DETAIL, groupsButton);
+    }
+
+    private void showSpamReportDetail(SpamReportRow report) {
+        selectedSpamReport = report;
+        navigate(AdminRoute.SPAM_REPORT_DETAIL, spamReportsButton);
+    }
+
+    private void installToastNode() {
+        if (toastLabel == null) {
+            toastLabel = new Label();
+            toastLabel.getStyleClass().add("admin-toast");
+            toastLabel.setManaged(false);
+            toastLabel.setVisible(false);
+            StackPane.setAlignment(
+                toastLabel,
+                javafx.geometry.Pos.BOTTOM_RIGHT
+            );
+            StackPane.setMargin(
+                toastLabel,
+                new javafx.geometry.Insets(0, 18, 18, 0)
+            );
+        }
+        if (!contentHost.getChildren().contains(toastLabel)) {
+            contentHost.getChildren().add(toastLabel);
+        }
+    }
+
+    private void showToast(String message) {
+        installToastNode();
+        toastLabel.setText(message);
+        toastLabel.setManaged(true);
+        toastLabel.setVisible(true);
+        if (toastTimer != null) {
+            toastTimer.stop();
+        }
+        toastTimer = new PauseTransition(Duration.millis(2200));
+        toastTimer.setOnFinished(event -> {
+            toastLabel.setVisible(false);
+            toastLabel.setManaged(false);
+        });
+        toastTimer.playFromStart();
     }
 
     private void navigateFromDashboard(AdminRoute route) {
