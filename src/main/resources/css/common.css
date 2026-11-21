@@ -1,0 +1,29 @@
+.root {
+    /* Màu thương hiệu */
+    -brand-orange: #FF7700;
+    -brand-orange-dark: #E76500;
+    -brand-orange-soft: #FFF1E4;
+    -brand-yellow: #FFFF99;
+
+    /* Màu thể hiện trạng thái */
+    -danger: #FF4736;
+    -success: #2EAD67;
+    -warning: #F2A93B;
+
+    /* Màu nền */
+    -surface:#FFFFFF;
+    -page-background: #F7F7F7;
+    
+    /* Màu đường viền */
+    -border: #EDEDED;
+    -muted-border: #D9D9D9;
+
+    /* Màu chữ */
+    -text-primary: #171717;
+    -text-muted: #727272;
+    -text-on-primary: #FFFFFF;
+
+    -fx-font-family: "Inter";
+    -fx-font-size: 13px;
+    -fx-background-color: -page-background;
+}

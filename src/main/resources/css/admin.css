@@ -1,0 +1,613 @@
+/* =====================================================
+   ADMIN SHELL
+   ===================================================== */
+
+.admin-shell {
+    -fx-background-color: -page-background;
+}
+
+.main-area {
+    -fx-background-color: -page-background;
+}
+
+/* =====================================================
+   SIDEBAR
+   ===================================================== */
+
+.sidebar {
+    -fx-min-width: 240px;
+    -fx-pref-width: 240px;
+    -fx-max-width: 240px;
+
+    -fx-padding: 22px 14px 16px 14px;
+    -fx-spacing: 6px;
+
+    -fx-background-color: -surface;
+    -fx-border-color: transparent -border transparent transparent;
+    -fx-border-width: 0 1px 0 0;
+}
+
+/* =====================================================
+   SIDEBAR BRAND
+   ===================================================== */
+
+.sidebar-brand {
+    -fx-padding: 0 8px 24px 8px;
+}
+
+.brand-icon-container {
+    -fx-min-width: 38px;
+    -fx-pref-width: 38px;
+    -fx-max-width: 38px;
+
+    -fx-min-height: 38px;
+    -fx-pref-height: 38px;
+    -fx-max-height: 38px;
+
+    -fx-background-color: -brand-orange;
+    -fx-background-radius: 11px;
+}
+
+.brand-icon {
+    -fx-icon-color: white;
+}
+
+.brand-name {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.brand-description {
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -brand-orange;
+}
+
+.sidebar-section-title {
+    -fx-padding: 0 10px 8px 10px;
+
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-muted;
+}
+
+/* =====================================================
+   SIDEBAR NAVIGATION
+   ===================================================== */
+
+.nav-button {
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-max-width: Infinity;
+
+    -fx-padding: 0 12px;
+    -fx-alignment: center-left;
+    -fx-content-display: left;
+    -fx-graphic-text-gap: 12px;
+
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 9px;
+
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+
+    -fx-font-size: 13px;
+    -fx-text-fill: -text-muted;
+
+    -fx-cursor: hand;
+}
+
+.nav-button .ikonli-font-icon {
+    -fx-icon-color: -text-muted;
+}
+
+.nav-button:hover {
+    -fx-background-color: -brand-yellow;
+    -fx-text-fill: -text-primary;
+}
+
+.nav-button:hover .ikonli-font-icon {
+    -fx-icon-color: -text-primary;
+}
+
+.nav-button:pressed {
+    -fx-background-color: derive(-brand-yellow, -8%);
+}
+
+/* Menu đang được chọn */
+.nav-button-active {
+    -fx-background-color: -brand-orange;
+    -fx-text-fill: -text-on-primary;
+    -fx-font-weight: bold;
+}
+
+.nav-button-active .ikonli-font-icon {
+    -fx-icon-color: -text-on-primary;
+}
+
+.nav-button-active:hover {
+    -fx-background-color: -brand-orange;
+    -fx-text-fill: -text-on-primary;
+}
+
+.nav-button-active:hover .ikonli-font-icon {
+    -fx-icon-color: -text-on-primary;
+}
+
+/* Nút đăng xuất */
+.logout-button {
+    -fx-text-fill: -danger;
+}
+
+.logout-button .ikonli-font-icon {
+    -fx-icon-color: -danger;
+}
+
+.logout-button:hover {
+    -fx-background-color: rgba(255, 71, 54, 0.10);
+    -fx-text-fill: -danger;
+}
+
+.logout-button:hover .ikonli-font-icon {
+    -fx-icon-color: -danger;
+}
+
+.sidebar-footer {
+    -fx-padding: 13px 8px 2px 8px;
+    -fx-spacing: 9px;
+    -fx-alignment: center-left;
+
+    -fx-border-color: -border transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.sidebar-admin-avatar {
+    -fx-min-width: 36px;
+    -fx-pref-width: 36px;
+    -fx-max-width: 36px;
+
+    -fx-min-height: 36px;
+    -fx-pref-height: 36px;
+    -fx-max-height: 36px;
+
+    -fx-background-color: -brand-yellow;
+    -fx-background-radius: 18px;
+    -fx-alignment: center;
+}
+
+.sidebar-admin-avatar-text {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -brand-orange-dark;
+}
+
+.sidebar-admin-copy {
+    -fx-min-width: 0;
+    -fx-alignment: center-left;
+}
+
+.sidebar-admin-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.sidebar-admin-email {
+    -fx-font-size: 9px;
+    -fx-text-fill: -text-muted;
+}
+
+.sidebar-logout-button {
+    -fx-min-width: 36px;
+    -fx-pref-width: 36px;
+    -fx-max-width: 36px;
+
+    -fx-min-height: 36px;
+    -fx-pref-height: 36px;
+    -fx-max-height: 36px;
+
+    -fx-padding: 0;
+    -fx-alignment: center;
+
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 10px;
+
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+
+    -fx-cursor: hand;
+}
+
+.sidebar-logout-button .ikonli-font-icon {
+    -fx-icon-color: -text-primary;
+}
+
+.sidebar-logout-button:hover {
+    -fx-background-color: -brand-orange-soft;
+}
+
+.sidebar-logout-button:hover .ikonli-font-icon {
+    -fx-icon-color: -brand-orange;
+}
+
+.sidebar-logout-button:pressed {
+    -fx-background-color: derive(-brand-orange-soft, -6%);
+}
+
+/* =====================================================
+   TOPBAR
+   ===================================================== */
+
+.topbar {
+    -fx-min-height: 72px;
+    -fx-pref-height: 72px;
+
+    -fx-padding: 0 24px;
+    -fx-spacing: 14px;
+    -fx-alignment: center-left;
+
+    -fx-background-color: -surface;
+
+    -fx-border-color: transparent transparent -border transparent;
+    -fx-border-width: 0 0 1px 0;
+}
+
+.topbar-title {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.topbar-description {
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-muted;
+}
+
+/* =====================================================
+   NOTIFICATION
+   ===================================================== */
+
+.notification-container {
+    -fx-padding: 2px;
+}
+
+.topbar-icon-button {
+    -fx-min-width: 38px;
+    -fx-pref-width: 38px;
+    -fx-max-width: 38px;
+
+    -fx-min-height: 38px;
+    -fx-pref-height: 38px;
+    -fx-max-height: 38px;
+
+    -fx-padding: 0;
+
+    -fx-background-color: -page-background;
+    -fx-background-radius: 19px;
+
+    -fx-border-color: -border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 19px;
+
+    -fx-cursor: hand;
+}
+
+.topbar-icon-button .ikonli-font-icon {
+    -fx-icon-color: -text-muted;
+}
+
+.topbar-icon-button:hover {
+    -fx-background-color: -brand-yellow;
+    -fx-border-color: -brand-yellow;
+}
+
+.topbar-icon-button:hover .ikonli-font-icon {
+    -fx-icon-color: -text-primary;
+}
+
+.notification-badge {
+    -fx-min-width: 16px;
+    -fx-pref-width: 16px;
+    -fx-min-height: 16px;
+    -fx-pref-height: 16px;
+
+    -fx-padding: 0;
+    -fx-alignment: center;
+
+    -fx-background-color: -danger;
+    -fx-background-radius: 8px;
+
+    -fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+    -fx-translate-x: 2px;
+    -fx-translate-y: -2px;
+}
+
+/* =====================================================
+   ADMIN PROFILE
+   ===================================================== */
+
+.admin-profile {
+    -fx-padding: 6px 10px;
+    -fx-background-color: -page-background;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.admin-profile:hover {
+    -fx-background-color: -brand-yellow;
+}
+
+.admin-avatar {
+    -fx-min-width: 34px;
+    -fx-pref-width: 34px;
+    -fx-max-width: 34px;
+
+    -fx-min-height: 34px;
+    -fx-pref-height: 34px;
+    -fx-max-height: 34px;
+
+    -fx-background-color: -brand-orange;
+    -fx-background-radius: 17px;
+}
+
+.admin-avatar .ikonli-font-icon {
+    -fx-icon-color: white;
+}
+
+.admin-avatar-text {
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.admin-name {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.admin-role {
+    -fx-font-size: 10px;
+    -fx-text-fill: -text-muted;
+}
+
+.profile-chevron {
+    -fx-icon-color: -text-muted;
+}
+
+/* =====================================================
+   CONTENT HOST
+   ===================================================== */
+
+.content-host {
+    -fx-padding: 24px;
+    -fx-background-color: -page-background;
+}
+
+.empty-page {
+    -fx-padding: 32px;
+}
+
+.empty-page-icon {
+    -fx-icon-color: -brand-orange;
+}
+
+.empty-page-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.empty-page-description {
+    -fx-text-fill: -text-muted;
+}
+
+/* =====================================================
+   ADMIN LOGIN
+   Bám ảnh Login User, đổi nội dung sang Admin
+   ===================================================== */
+
+.admin-login-root {
+    -fx-padding: 10px;
+    -fx-spacing: 0;
+    -fx-background-color: -page-background;
+}
+
+.login-brand-panel {
+    -fx-min-width: 420px;
+    -fx-pref-width: 520px;
+    -fx-max-width: Infinity;
+    -fx-background-color: linear-gradient(
+        to bottom,
+        -brand-orange 0%,
+        #FF9135 52%,
+        -brand-yellow 100%
+    );
+    -fx-background-radius: 24px;
+}
+
+.login-brand-content {
+    -fx-min-width: 340px;
+    -fx-pref-width: 360px;
+    -fx-max-width: 360px;
+    -fx-padding: 40px;
+}
+
+.login-brand-title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.login-brand-description {
+    -fx-max-width: 350px;
+    -fx-font-size: 13px;
+    -fx-line-spacing: 3px;
+    -fx-text-fill: white;
+}
+
+.login-brand-pill {
+    -fx-padding: 10px 24px;
+    -fx-background-color: rgba(255, 255, 255, 0.12);
+    -fx-background-radius: 22px;
+    -fx-border-color: rgba(255, 255, 255, 0.62);
+    -fx-border-width: 1px;
+    -fx-border-radius: 22px;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.login-form-panel {
+    -fx-min-width: 420px;
+    -fx-pref-width: 520px;
+    -fx-max-width: Infinity;
+    -fx-background-color: #FAFAFA;
+}
+
+.login-form {
+    -fx-min-width: 320px;
+    -fx-pref-width: 340px;
+    -fx-max-width: 340px;
+    -fx-padding: 40px;
+}
+
+.login-form-title {
+    -fx-max-width: Infinity;
+    -fx-alignment: center;
+    -fx-font-size: 20px;
+    -fx-text-fill: -text-primary;
+}
+
+.login-form-subtitle {
+    -fx-max-width: Infinity;
+    -fx-padding: 0 0 14px 0;
+    -fx-alignment: center;
+    -fx-font-size: 12px;
+    -fx-text-fill: -text-primary;
+}
+
+.login-field-label {
+    -fx-padding: 7px 0 0 0;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.login-input {
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+    -fx-padding: 0 14px;
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+    -fx-background-radius: 21px;
+    -fx-border-color: -muted-border;
+    -fx-border-width: 1px;
+    -fx-border-radius: 21px;
+    -fx-font-size: 12px;
+    -fx-text-fill: -text-primary;
+    -fx-prompt-text-fill: -text-muted;
+}
+
+.login-input:focused {
+    -fx-border-color: -brand-orange;
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(255, 119, 0, 0.12),
+        10,
+        0.18,
+        0,
+        0
+    );
+}
+
+.login-password-wrapper {
+    -fx-min-height: 42px;
+    -fx-pref-height: 42px;
+}
+
+.password-input {
+    -fx-padding: 0 44px 0 14px;
+}
+
+.password-visibility-button {
+    -fx-min-width: 36px;
+    -fx-pref-width: 36px;
+    -fx-min-height: 36px;
+    -fx-pref-height: 36px;
+    -fx-padding: 0;
+    -fx-background-color: transparent;
+    -fx-background-radius: 18px;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-translate-x: -4px;
+}
+
+.password-visibility-button:hover {
+    -fx-background-color: -brand-yellow;
+}
+
+.password-visibility-button .ikonli-font-icon {
+    -fx-icon-color: -text-muted;
+}
+
+.password-visibility-button:hover .ikonli-font-icon {
+    -fx-icon-color: -brand-orange-dark;
+}
+
+.login-submit-button {
+    -fx-min-height: 44px;
+    -fx-pref-height: 44px;
+    -fx-max-width: 170px;
+    -fx-padding: 0 18px;
+    -fx-background-color: #FF9135;
+    -fx-background-insets: 0;
+    -fx-background-radius: 22px;
+    -fx-border-width: 0;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.login-submit-button:hover {
+    -fx-background-color: -brand-orange;
+}
+
+.login-submit-button:pressed {
+    -fx-background-color: derive(-brand-orange-dark, -8%);
+}
+
+.login-submit-button:disabled {
+    -fx-opacity: 0.65;
+}
+
+.login-error {
+    -fx-padding: 9px 11px;
+    -fx-background-color: rgba(255, 71, 54, 0.10);
+    -fx-background-radius: 9px;
+    -fx-border-color: rgba(255, 71, 54, 0.30);
+    -fx-border-width: 1px;
+    -fx-border-radius: 9px;
+    -fx-font-size: 11px;
+    -fx-text-fill: -danger;
+}
+
+.login-forgot-link {
+    -fx-padding: 6px 0 2px 0;
+    -fx-border-width: 0;
+    -fx-font-size: 11px;
+    -fx-text-fill: -text-primary;
+    -fx-underline: false;
+}
+
+.login-forgot-link:hover {
+    -fx-text-fill: -brand-orange;
+    -fx-underline: true;
+}

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.control.Tooltip?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.chatapp.admin.controller.AdminShellController"
+            styleClass="admin-shell">
+
+    <!-- SIDEBAR -->
+    <left>
+        <VBox styleClass="sidebar">
+
+            <!-- Thương hiệu -->
+            <HBox styleClass="sidebar-brand"
+                alignment="CENTER_LEFT"
+                spacing="10">
+
+                <StackPane styleClass="brand-icon-container">
+                    <FontIcon iconLiteral="fas-comment-dots"
+                            iconSize="18"
+                            styleClass="brand-icon"/>
+                </StackPane>
+
+                <VBox spacing="2">
+                    <Label text="MyBrand"
+                        styleClass="brand-name" />
+
+                    <Label text="ADMIN PANEL"
+                        styleClass="brand-description"/>
+                </VBox>
+
+            </HBox>
+
+            <Label text="QUẢN TRỊ HỆ THỐNG"
+                styleClass="sidebar-section-title"/>
+
+            <!-- Dashboard -->
+            <Button fx:id="dashboardButton"
+                    text="Dashboard"
+                    onAction="#showDashboard"
+                    styleClass="nav-button,nav-button-active">
+                <graphic>
+                    <FontIcon iconLiteral="fas-th-large"
+                            iconSize="16"/>
+                </graphic>
+            </Button>
+
+            <!-- Người dùng -->
+            <Button fx:id="usersButton"
+                    text="Người dùng"
+                    onAction="#showUsers"
+                    styleClass="nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-user"
+                            iconSize="16"/>
+                </graphic>
+            </Button>
+
+            <!-- Lịch sử đăng nhập -->
+            <Button fx:id="loginHistoryButton"
+                    text="Lịch sử đăng nhập"
+                    onAction="#showLoginHistory"
+                    styleClass="nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-sign-in-alt"
+                            iconSize="16"/>
+                </graphic>
+            </Button>
+
+            <!-- Nhóm chat -->
+            <Button fx:id="groupsButton"
+                    text="Nhóm chat"
+                    onAction="#showGroups"
+                    styleClass="nav-button">
+                <graphic>
+                    <FontIcon iconLiteral="fas-comments"
+                            iconSize="16"/>
+                </graphic>
+            </Button>
+
+            <!-- Báo cáo spam -->
+            <Button fx:id="spamReportsButton"
+                    text="Báo cáo spam"
+                    onAction="#showSpamReports"
+                    styleClass="nav-button">
+
+                <graphic>
+                    <FontIcon iconLiteral="fas-shield-alt"
+                              iconSize="16"/>
+                </graphic>
+
+            </Button>
+
+            <!-- Người dùng mới -->
+            <Button fx:id="newUsersButton"
+                    text="Người dùng mới"
+                    onAction="#showNewUsers"
+                    styleClass="nav-button">
+
+                <graphic>
+                    <FontIcon iconLiteral="fas-user-plus"
+                              iconSize="16"/>
+                </graphic>
+
+            </Button>
+
+            <!-- Quan hệ bạn bè -->
+            <Button fx:id="friendRelationsButton"
+                    text="Quan hệ bạn bè"
+                    onAction="#showFriendRelations"
+                    styleClass="nav-button">
+
+                <graphic>
+                    <FontIcon iconLiteral="fas-project-diagram"
+                              iconSize="16"/>
+                </graphic>
+
+            </Button>
+
+            <!-- Người dùng hoạt động -->
+            <Button fx:id="activeUsersButton"
+                    text="Người dùng hoạt động"
+                    onAction="#showActiveUsers"
+                    styleClass="nav-button">
+
+                <graphic>
+                    <FontIcon iconLiteral="fas-chart-line"
+                              iconSize="16"/>
+                </graphic>
+
+            </Button>
+
+            <!-- Đẩy footer tài khoản xuống cuối Sidebar -->
+            <Region VBox.vgrow="ALWAYS" />
+
+            <!-- Tài khoản Admin và hành động đăng xuất -->
+            <HBox styleClass="sidebar-footer"
+                alignment="CENTER_LEFT"
+                spacing="9">
+
+                <StackPane styleClass="sidebar-admin-avatar"
+                        alignment="CENTER">
+
+                    <Label fx:id="adminInitialsLabel"
+                        text="--"
+                        styleClass="sidebar-admin-avatar-text"/>
+
+                </StackPane>
+
+                <VBox styleClass="sidebar-admin-copy"
+                    alignment="CENTER_LEFT"
+                    spacing="3"
+                    HBox.hgrow="ALWAYS">
+
+                    <Label fx:id="adminNameLabel"
+                        text="Đang tải..."
+                        styleClass="sidebar-admin-name"/>
+
+                    <Label fx:id="adminEmailLabel"
+                        text=""
+                        styleClass="sidebar-admin-email"/>
+
+                </VBox>
+                <Button onAction="#handleLogout"
+                        styleClass="sidebar-logout-button"
+                        contentDisplay="GRAPHIC_ONLY"
+                        accessibleText="Đăng xuất">
+
+                    <graphic>
+                        <FontIcon iconLiteral="fas-sign-out-alt"
+                                iconSize="16" />
+                    </graphic>
+
+                    <tooltip>
+                        <Tooltip text="Đăng xuất" />
+                    </tooltip>
+
+                </Button>
+
+            </HBox>
+
+
+        </VBox>
+    </left>
+
+    <center>
+        <VBox styleClass="main-area">
+
+            <!-- TOPBAR -->
+            <HBox styleClass="topbar"
+                  alignment="CENTER_LEFT">
+
+                <VBox spacing="2">
+                    <Label fx:id="pageTitleLabel"
+                           text="Dashboard"
+                           styleClass="topbar-title"/>
+
+                    <Label text="Quản trị hệ thống chat"
+                           styleClass="topbar-description"/>
+                </VBox>
+
+                <!-- Đẩy các thành phần còn lại sang bên phải -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Thông báo -->
+                <StackPane styleClass="notification-container">
+
+                    <Button styleClass="topbar-icon-button">
+                        <graphic>
+                            <FontIcon iconLiteral="fas-bell"
+                                      iconSize="17"/>
+                        </graphic>
+                    </Button>
+
+                    <Label text="3"
+                           styleClass="notification-badge"
+                           StackPane.alignment="TOP_RIGHT"/>
+
+                </StackPane>
+
+                <!-- Thông tin Admin -->
+                <HBox styleClass="admin-profile"
+                      alignment="CENTER_LEFT"
+                      spacing="10">
+
+                    <StackPane styleClass="admin-avatar">
+                        <Label fx:id="topbarAdminInitialsLabel"
+                               text="--"
+                               styleClass="admin-avatar-text"/>
+                    </StackPane>
+
+                    <VBox spacing="1">
+                        <Label fx:id="topbarAdminNameLabel"
+                               text="Đang tải..."
+                               styleClass="admin-name"/>
+
+                        <Label fx:id="topbarAdminRoleLabel"
+                               text=""
+                               styleClass="admin-role"/>
+                    </VBox>
+
+                    <FontIcon iconLiteral="fas-chevron-down"
+                              iconSize="11"
+                              styleClass="profile-chevron"/>
+
+                </HBox>
+
+            </HBox>
+
+            <!-- NƠI HIỂN THỊ CÁC TRANG -->
+            <StackPane fx:id="contentHost"
+                       styleClass="content-host"
+                       VBox.vgrow="ALWAYS">
+
+                <VBox alignment="CENTER"
+                      spacing="8"
+                      styleClass="empty-page">
+
+                    <FontIcon iconLiteral="fas-th-large"
+                              iconSize="32"
+                              styleClass="empty-page-icon"/>
+
+                    <Label text="Dashboard"
+                           styleClass="empty-page-title"/>
+
+                    <Label text="Nội dung Dashboard sẽ được xây dựng tại đây"
+                           styleClass="empty-page-description"/>
+
+                </VBox>
+
+            </StackPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>
