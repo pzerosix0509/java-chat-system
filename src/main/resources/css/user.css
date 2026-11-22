@@ -1,0 +1,171 @@
+/* USER SUBSYSTEM - AUTHENTICATION & PROFILE */
+
+.auth-root {
+    -fx-background-color: #FFFFFF;
+    -fx-padding: 16;
+}
+
+.auth-brand-panel {
+    -fx-background-color: linear-gradient(to bottom, #FF7700 50.48%, #FFFF99 100%);
+    -fx-background-radius: 30;
+}
+
+.auth-brand-title {
+    -fx-font-size: 40px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #FAF9F9;
+}
+
+.auth-brand-subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #FAF9F9;
+    -fx-max-width: 420px;
+    -fx-wrap-text: true;
+}
+
+.auth-brand-button,
+.auth-submit-button {
+    -fx-background-color: #FF9436;
+    -fx-background-radius: 27.5;
+    -fx-border-color: #D9D9D9;
+    -fx-border-radius: 27.5;
+    -fx-text-fill: #FAF9F9;
+    -fx-font-size: 14px;
+    -fx-pref-width: 203px;
+    -fx-pref-height: 55px;
+    -fx-cursor: hand;
+}
+
+.auth-brand-button:hover,
+.auth-submit-button:hover {
+    -fx-background-color: #FF7700;
+}
+
+.auth-form-panel {
+    -fx-background-color: #FAF9F9;
+}
+
+.auth-title {
+    -fx-font-size: 28px;
+    -fx-text-fill: #000000;
+}
+
+.auth-subtitle {
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+    -fx-max-width: 560px;
+    -fx-wrap-text: true;
+}
+
+.auth-result-title {
+    -fx-font-size: 28px;
+    -fx-text-fill: #000000;
+}
+
+.auth-field-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+.auth-input {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #D9D9D9;
+    -fx-background-radius: 17.5;
+    -fx-border-radius: 17.5;
+    -fx-font-size: 10px;
+    -fx-text-fill: #000000;
+    -fx-prompt-text-fill: rgba(0, 0, 0, 0.3);
+    -fx-padding: 0 0 0 11;
+    -fx-pref-width: 283px;
+    -fx-pref-height: 42px;
+}
+
+.auth-input-error {
+    -fx-text-fill: #FF4736;
+    -fx-prompt-text-fill: #FF4736;
+}
+
+.auth-error,
+.auth-error-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FF4736;
+}
+
+.auth-link,
+.auth-inline-link {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-underline: false;
+}
+
+.auth-inline-link {
+    -fx-font-size: 18px;
+    -fx-padding: 0;
+}
+
+.auth-inline-text {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.auth-form-center {
+    -fx-alignment: center-left;
+}
+
+.auth-form-content .auth-input {
+    -fx-max-width: 283px;
+}
+
+.password-visibility-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+    -fx-cursor: hand;
+}
+
+/* PROFILE */
+
+.profile-root {
+    -fx-background-color: #FFFFFF;
+}
+
+.profile-name {
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+.profile-handle {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.profile-section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
+}
+
+.profile-details {
+    -fx-alignment: top-left;
+}
+
+.profile-card {
+    -fx-background-color: #FAF9F9;
+    -fx-background-radius: 16;
+}
+
+.profile-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.profile-value {
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.profile-edit-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}

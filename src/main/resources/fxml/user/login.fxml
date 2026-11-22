@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.user.controller.LoginController"
+      styleClass="auth-root"
+      prefWidth="1440" prefHeight="1024"
+      maxWidth="Infinity" maxHeight="Infinity">
+
+    <VBox styleClass="auth-brand-panel"
+          prefWidth="704" minWidth="320"
+          HBox.hgrow="ALWAYS"
+          alignment="CENTER_LEFT">
+        <padding>
+            <Insets top="80" bottom="80" left="122" right="40" />
+        </padding>
+
+        <VBox styleClass="auth-brand-content" spacing="8">
+            <Label text="My Brand" styleClass="auth-brand-title" />
+            <Label text="Leading the world for 20 years with MyBrand"
+                   wrapText="true" maxWidth="420"
+                   styleClass="auth-brand-subtitle" />
+            <Button fx:id="brandButton" text="Read more"
+                    onAction="#handleRegister"
+                    styleClass="auth-brand-button" />
+        </VBox>
+    </VBox>
+
+    <VBox styleClass="auth-form-panel"
+          prefWidth="704" minWidth="0"
+          HBox.hgrow="ALWAYS"
+          alignment="CENTER">
+
+        <HBox styleClass="auth-form-center" alignment="CENTER_LEFT">
+            <Region HBox.hgrow="ALWAYS" />
+
+            <VBox styleClass="auth-form-content"
+                  maxWidth="283" alignment="TOP_LEFT" spacing="0">
+
+                <VBox spacing="6">
+                    <padding><Insets bottom="8" /></padding>
+                    <Label text="Welcome back!" styleClass="auth-title" />
+                    <Label text="Thank you for choosing us"
+                           styleClass="auth-subtitle" />
+                </VBox>
+
+                <Label fx:id="errorLabel" text=""
+                       wrapText="true" maxWidth="283"
+                       visible="false" managed="false"
+                       styleClass="auth-error">
+                    <VBox.margin><Insets top="2" bottom="12" /></VBox.margin>
+                </Label>
+
+                <VBox spacing="5">
+                    <Label text="Email/Username"
+                           styleClass="auth-field-label" />
+                    <TextField fx:id="usernameField"
+                               promptText="Enter your email or username"
+                               onAction="#handleLogin"
+                               styleClass="auth-input" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <VBox.margin><Insets top="22" /></VBox.margin>
+                    <Label text="Password" styleClass="auth-field-label" />
+                    <StackPane styleClass="auth-password-wrapper">
+                        <PasswordField fx:id="passwordField"
+                                       promptText="*******"
+                                       onAction="#handleLogin"
+                                       styleClass="auth-input" />
+                        <TextField fx:id="visiblePasswordField"
+                                   promptText="*******"
+                                   onAction="#handleLogin"
+                                   visible="false" managed="false"
+                                   styleClass="auth-input" />
+                        <Button fx:id="passwordVisibilityButton"
+                                prefWidth="28" prefHeight="42"
+                                focusTraversable="false"
+                                onAction="#togglePasswordVisibility"
+                                StackPane.alignment="CENTER_RIGHT"
+                                styleClass="password-visibility-button">
+                            <graphic>
+                                <FontIcon fx:id="passwordVisibilityIcon"
+                                          iconLiteral="fas-eye" iconSize="14" />
+                            </graphic>
+                        </Button>
+                    </StackPane>
+                </VBox>
+
+                <Hyperlink text="Forget password?"
+                           onAction="#handleForgotPassword"
+                           styleClass="auth-link">
+                    <VBox.margin><Insets top="22" /></VBox.margin>
+                </Hyperlink>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <VBox.margin><Insets top="12" /></VBox.margin>
+                    <Button text="Login" onAction="#handleLogin"
+                            defaultButton="true"
+                            styleClass="auth-submit-button" />
+                </HBox>
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+        </HBox>
+    </VBox>
+
+</HBox>

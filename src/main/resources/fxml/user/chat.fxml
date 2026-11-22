@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="1024" prefWidth="1440" styleClass="chat-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="com.chatapp.user.controller.ChatController">
+
+    <!-- LEFT: connections -->
+    <VBox minWidth="320" prefWidth="449" styleClass="chat-left-panel" HBox.hgrow="NEVER">
+
+        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="58" styleClass="chat-left-header">
+            <padding><Insets left="26" right="12" top="12" /></padding>
+            <Label styleClass="chat-brand" text="My Brand" HBox.hgrow="ALWAYS" />
+         <Separator prefHeight="0.0" prefWidth="188.0" visible="false" />
+            <HBox alignment="CENTER_RIGHT" spacing="12">
+                <Button focusTraversable="false" prefHeight="26" prefWidth="26" styleClass="chat-icon-button">
+                    <graphic><FontIcon iconLiteral="fas-edit" iconSize="16" /></graphic>
+                </Button>
+                <Button focusTraversable="false" prefHeight="26" prefWidth="26" styleClass="chat-icon-button">
+                    <graphic><FontIcon iconLiteral="fas-user-plus" iconSize="16" /></graphic>
+                </Button>
+                <Button focusTraversable="false" prefHeight="26" prefWidth="26" styleClass="chat-icon-button">
+                    <graphic><FontIcon iconLiteral="fas-cog" iconSize="16" /></graphic>
+                </Button>
+            </HBox>
+        </HBox>
+
+        <VBox styleClass="chat-search-box">
+            <padding><Insets bottom="20" left="26" right="26" top="8" /></padding>
+            <TextField maxWidth="Infinity" prefHeight="39.0" prefWidth="397.0" promptText="Search your connections" styleClass="chat-search" />
+        </VBox>
+
+        <VBox spacing="0" styleClass="conversation-list" VBox.vgrow="ALWAYS">
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row,conversation-row-selected">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar1" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="Truong Duy Phu" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="I have done my work, please veri..." wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="11:30" />
+                </VBox>
+            </HBox>
+
+            <HBox fx:id="groupConversationRow" alignment="CENTER_LEFT" fillHeight="false" onMouseClicked="#openGroupChat" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar2" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="BoTuSieuDang Group" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="You: I have sent you new task. Can yo..." wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="06:20" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar3" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="Duy Hieu" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="I will delete this app. Goodbye!" wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="12:30" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar4" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="Tuan Anh" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="please teach me how to code" wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="Now" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar5" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="Huu Hiep" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="sup gang" wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="Now" />
+                    <Label styleClass="unread-badge" text="2" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar6" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="Do PC" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="Are you Vu?" wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="03:00" />
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="103" spacing="14" styleClass="conversation-row">
+                <padding><Insets left="14" right="12" /></padding>
+                <StackPane fx:id="conversationAvatar7" prefHeight="56" prefWidth="56" />
+                <VBox alignment="CENTER_LEFT" minWidth="0" spacing="4" HBox.hgrow="ALWAYS">
+                    <Label styleClass="conversation-name" text="LewLew" />
+                    <Label maxWidth="280" styleClass="conversation-preview" text="Wanna buy my fridge?" wrapText="true" />
+                </VBox>
+                <VBox alignment="TOP_RIGHT" prefWidth="52" spacing="4">
+                    <Label styleClass="conversation-time" text="15:30" />
+                </VBox>
+            </HBox>
+        </VBox>
+
+        <HBox alignment="CENTER" fillHeight="false" prefHeight="60" spacing="60" styleClass="chat-bottom-nav">
+            <padding><Insets bottom="18" /></padding>
+            <Button styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-comments" iconSize="16" /></graphic>
+            </Button>
+            <Button styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-search" iconSize="16" /></graphic>
+            </Button>
+            <Button styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-robot" iconSize="16" /></graphic>
+            </Button>
+            <Button styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-bell" iconSize="16" /></graphic>
+            </Button>
+            <Button styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-user" iconSize="16" /></graphic>
+            </Button>
+        </HBox>
+    </VBox>
+
+    <!-- CENTER: conversation -->
+    <VBox minWidth="0" prefWidth="720" styleClass="chat-center-panel" HBox.hgrow="ALWAYS">
+
+        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="61" spacing="20" styleClass="chat-header">
+            <padding><Insets left="24" right="20" /></padding>
+            <StackPane fx:id="headerAvatar" prefHeight="56" prefWidth="56" />
+            <VBox spacing="2">
+                <Label styleClass="chat-header-name" text="Truong Duy Phu" />
+                <Label styleClass="chat-header-status" text="@@tdp2006" />
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="infoButton" focusTraversable="false" onAction="#openProfile" prefHeight="26" prefWidth="26" styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-info-circle" iconSize="16" /></graphic>
+            </Button>
+        </HBox>
+
+        <VBox spacing="12" styleClass="chat-message-view" VBox.vgrow="ALWAYS">
+            <padding><Insets bottom="14" left="14" right="14" top="14" /></padding>
+
+            <HBox alignment="TOP_LEFT" fillHeight="false" spacing="14">
+                <StackPane fx:id="messageAvatar1" prefHeight="56" prefWidth="56" />
+                <Label maxWidth="320" styleClass="chat-bubble-in" text="Can you see the last message I have sent to you?" wrapText="true" />
+            </HBox>
+
+            <HBox alignment="TOP_RIGHT" fillHeight="false">
+                <Label maxWidth="240" styleClass="chat-bubble-out" text="I have seen it. Well done" wrapText="true" />
+            </HBox>
+
+            <HBox alignment="TOP_RIGHT" fillHeight="false">
+                <Label maxWidth="320" styleClass="chat-bubble-out" text="I want you to do your task that I have given to you last week." wrapText="true" />
+            </HBox>
+
+            <HBox alignment="TOP_LEFT" fillHeight="false" spacing="14">
+                <Region prefWidth="56" />
+                <Label maxWidth="280" styleClass="chat-bubble-in" text="Sure, I will send you the status rn" wrapText="true" />
+            </HBox>
+
+            <HBox alignment="TOP_LEFT" fillHeight="false" spacing="14">
+                <StackPane fx:id="messageAvatar2" prefHeight="56" prefWidth="56" />
+                <Label maxWidth="320" styleClass="chat-bubble-in" text="I have done my work, please verify it soon. So, I can move on the next task on the backlog" wrapText="true" />
+            </HBox>
+        </VBox>
+
+        <HBox alignment="BOTTOM_LEFT" fillHeight="false" prefHeight="51.0" prefWidth="721.0" spacing="10" styleClass="chat-suggestion-bar">
+            <padding><Insets bottom="14" left="26" right="20" top="8" /></padding>
+         <Separator prefWidth="200.0" />
+            <Label maxWidth="196" minWidth="0" styleClass="chat-suggestion" text="Sure, I'm gonna check it rn." wrapText="true" HBox.hgrow="ALWAYS" />
+            <Label maxWidth="300" minWidth="0" styleClass="chat-suggestion" text="Thanks for your hardwork! Please proceed." wrapText="true" HBox.hgrow="ALWAYS" />
+            <Label maxWidth="151" minWidth="0" styleClass="chat-suggestion" text="Okay, I will do it now" wrapText="true" HBox.hgrow="ALWAYS" />
+            <Button focusTraversable="false" prefHeight="26" prefWidth="26" styleClass="chat-icon-button">
+                <graphic><FontIcon iconLiteral="fas-robot" iconSize="16" /></graphic>
+            </Button>
+         <Separator prefWidth="200.0" />
+        </HBox>
+
+        <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="60" spacing="10" styleClass="chat-input-bar">
+            <padding><Insets left="26" right="20" /></padding>
+            <TextField maxWidth="Infinity" prefHeight="51.0" prefWidth="632.0" promptText="Type a message..." styleClass="chat-message-input" HBox.hgrow="ALWAYS" />
+            <Button focusTraversable="false" prefHeight="30" prefWidth="30" styleClass="chat-send-button">
+                <graphic><FontIcon iconLiteral="fas-paper-plane" iconSize="14" /></graphic>
+            </Button>
+        </HBox>
+    </VBox>
+
+    <!-- RIGHT: contact details -->
+    <VBox minWidth="220" prefWidth="271" styleClass="chat-right-panel" HBox.hgrow="NEVER">
+        <padding><Insets bottom="16" left="12" right="12" top="2" /></padding>
+
+        <HBox alignment="CENTER" fillHeight="false">
+            <StackPane fx:id="selfAvatar" prefHeight="113" prefWidth="113" />
+        </HBox>
+
+        <VBox alignment="CENTER" spacing="2">
+            <VBox.margin><Insets top="20" /></VBox.margin>
+            <Label styleClass="side-profile-name" text="Truong Duy Phu" />
+            <Label styleClass="side-profile-handle" text="@@tdp2006" />
+        </VBox>
+
+        <Label styleClass="side-section-title" text="Utilities &amp; interaction">
+            <VBox.margin><Insets bottom="6" left="10" top="20" /></VBox.margin>
+        </Label>
+        <VBox spacing="4" styleClass="side-actions">
+            <padding><Insets left="32" /></padding>
+            <Button onAction="#openProfile" styleClass="side-action" text="Search local messages">
+                <graphic><FontIcon iconLiteral="fas-search" iconSize="14" /></graphic>
+            </Button>
+            <Button fx:id="viewProfileButton" onAction="#openProfile" styleClass="side-action" text="View their profile">
+                <graphic><FontIcon iconLiteral="fas-user" iconSize="14" /></graphic>
+            </Button>
+        </VBox>
+
+        <Label styleClass="side-section-title" text="Privacy &amp; support">
+            <VBox.margin><Insets bottom="6" left="10" top="20" /></VBox.margin>
+        </Label>
+        <VBox spacing="4" styleClass="side-actions">
+            <padding><Insets left="32" /></padding>
+            <Button styleClass="side-action" text="Block">
+                <graphic><FontIcon iconLiteral="fas-ban" iconSize="14" /></graphic>
+            </Button>
+            <Button styleClass="side-action" text="Put into Spam">
+                <graphic><FontIcon iconLiteral="fas-exclamation-triangle" iconSize="14" /></graphic>
+            </Button>
+            <Button styleClass="side-action" text="Unfriend">
+                <graphic><FontIcon iconLiteral="fas-user-minus" iconSize="14" /></graphic>
+            </Button>
+        </VBox>
+    </VBox>
+
+</HBox>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox alignment="TOP_LEFT" maxHeight="Infinity" maxWidth="Infinity" prefHeight="1024" prefWidth="1440" styleClass="profile-root" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26" fx:controller="com.chatapp.user.controller.ProfileController">
+
+    <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="52">
+        <padding><Insets left="20" right="20" top="10" /></padding>
+        <Button fx:id="backButton" focusTraversable="false" onAction="#handleBack" prefHeight="32" prefWidth="32" styleClass="chat-icon-button">
+            <graphic><FontIcon iconLiteral="fas-arrow-left" iconSize="16" /></graphic>
+        </Button>
+    </HBox>
+
+    <VBox alignment="TOP_CENTER" spacing="0" VBox.vgrow="ALWAYS">
+        <padding><Insets bottom="40" left="20" right="20" top="100" /></padding>
+
+        <StackPane fx:id="profileAvatar" prefHeight="113" prefWidth="113" />
+
+        <VBox alignment="CENTER" fillWidth="false" spacing="2">
+            <VBox.margin><Insets top="16" /></VBox.margin>
+
+            <Label styleClass="profile-name" text="Truong Duy Phu" textAlignment="CENTER" />
+            <Label styleClass="profile-handle" text="@@tdp2006" textAlignment="CENTER" />
+         <VBox alignment="CENTER" fillWidth="false" spacing="2">
+            <children>
+               <HBox alignment="TOP_RIGHT" fillHeight="false" prefHeight="26.0" prefWidth="239.0">
+                  <children>
+            
+                                 <Button fx:id="editButton" focusTraversable="false" prefHeight="24" prefWidth="24" styleClass="profile-edit-button">
+                            <graphic>
+                           <FontIcon iconLiteral="fas-edit" iconSize="12" />
+                        </graphic>
+                        </Button>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+        </VBox>
+
+        <VBox alignment="TOP_LEFT" maxWidth="560" spacing="10" styleClass="profile-details">
+            <VBox.margin><Insets top="20" /></VBox.margin>
+
+            <Label styleClass="profile-section-title" text="Profile’s information" />
+
+            <VBox spacing="8" styleClass="profile-card">
+                <padding><Insets bottom="16" left="16" right="16" top="16" /></padding>
+
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Email:" />
+                    <Label styleClass="profile-value" text="truongduyphu28@gmail.com" HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Username:" />
+                    <Label styleClass="profile-value" text="tdp2006" HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Fullname:" />
+                    <Label styleClass="profile-value" text="Truong Duy Phu" HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Address:" />
+                    <Label styleClass="profile-value" text="248 Dong Hoa, Phuong An Dong, tp HCM" wrapText="true" HBox.hgrow="ALWAYS" />
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Gender:" />
+                    <Label styleClass="profile-value" text="Unknown" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+
+            <Label styleClass="profile-section-title" text="Privacy &amp; Security">
+                <VBox.margin><Insets top="12" /></VBox.margin>
+            </Label>
+
+            <VBox spacing="8" styleClass="profile-card">
+                <padding><Insets bottom="16" left="16" right="16" top="16" /></padding>
+                <HBox alignment="CENTER_LEFT" fillHeight="false" spacing="8">
+                    <Label prefWidth="88" styleClass="profile-label" text="Password:" />
+                    <Label styleClass="profile-value" text="*********" HBox.hgrow="ALWAYS" />
+                </HBox>
+            </VBox>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+    </VBox>
+</VBox>

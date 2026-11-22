@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.user.controller.RegisterController"
+      styleClass="auth-root"
+      prefWidth="1440" prefHeight="1024"
+      maxWidth="Infinity" maxHeight="Infinity">
+
+    <VBox styleClass="auth-brand-panel"
+          prefWidth="704" minWidth="320"
+          HBox.hgrow="ALWAYS"
+          alignment="CENTER_LEFT">
+        <padding>
+            <Insets top="80" bottom="80" left="122" right="40" />
+        </padding>
+
+        <VBox styleClass="auth-brand-content" spacing="8">
+            <Label text="My Brand" styleClass="auth-brand-title" />
+            <Label text="Leading the world for 20 years with MyBrand"
+                   wrapText="true" maxWidth="420"
+                   styleClass="auth-brand-subtitle" />
+            <Button fx:id="brandButton" text="Read more"
+                    onAction="#handleBrand"
+                    styleClass="auth-brand-button" />
+        </VBox>
+    </VBox>
+
+    <VBox styleClass="auth-form-panel"
+          prefWidth="704" minWidth="0"
+          HBox.hgrow="ALWAYS"
+          alignment="CENTER">
+
+        <HBox styleClass="auth-form-center" alignment="CENTER_LEFT">
+            <Region HBox.hgrow="ALWAYS" />
+
+            <VBox styleClass="auth-form-content"
+                  maxWidth="283" alignment="TOP_LEFT" spacing="0">
+
+                <VBox spacing="4">
+                    <Label text="Create an account" styleClass="auth-title" />
+                    <HBox alignment="CENTER_LEFT" spacing="6">
+                        <Label text="Already have an account?"
+                               styleClass="auth-inline-text" />
+                        <Hyperlink text="Login"
+                                   onAction="#handleLogin"
+                                   styleClass="auth-inline-link" />
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="5">
+                    <VBox.margin><Insets top="26" /></VBox.margin>
+                    <Label text="Email" styleClass="auth-field-label" />
+                    <TextField fx:id="emailField"
+                               promptText="duyhieu@gmail.com"
+                               styleClass="auth-input" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <VBox.margin><Insets top="20" /></VBox.margin>
+                    <Label text="Username" styleClass="auth-field-label" />
+                    <TextField fx:id="usernameField"
+                               promptText="Enter your username"
+                               styleClass="auth-input" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <VBox.margin><Insets top="20" /></VBox.margin>
+                    <Label text="Password" styleClass="auth-field-label" />
+                    <PasswordField fx:id="passwordField"
+                                   promptText="*******"
+                                   styleClass="auth-input" />
+                </VBox>
+
+                <VBox spacing="5">
+                    <VBox.margin><Insets top="20" /></VBox.margin>
+                    <Label text="Enter your password again to confirm"
+                           wrapText="true"
+                           styleClass="auth-field-label" />
+                    <PasswordField fx:id="confirmPasswordField"
+                                   promptText="*********"
+                                   onAction="#handleRegister"
+                                   styleClass="auth-input,auth-input-error" />
+                </VBox>
+
+                <Label fx:id="errorLabel"
+                       text="Your password does not match"
+                       visible="false" managed="false"
+                       styleClass="auth-error-text">
+                    <VBox.margin><Insets top="6" /></VBox.margin>
+                </Label>
+
+                <HBox alignment="CENTER_RIGHT">
+                    <VBox.margin><Insets top="14" /></VBox.margin>
+                    <Button text="Register" onAction="#handleRegister"
+                            defaultButton="true"
+                            styleClass="auth-submit-button" />
+                </HBox>
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+        </HBox>
+    </VBox>
+
+</HBox>

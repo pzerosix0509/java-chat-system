@@ -12,6 +12,8 @@ hs_err_pid*
 replay_pid*
 
 # IDE
+opencode.json
+.opencode/
 .idea/
 *.iml
 *.ipr
