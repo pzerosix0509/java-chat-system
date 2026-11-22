@@ -102,7 +102,7 @@ public class LoginHistoryController {
     private TableColumn<LoginHistoryRow, String> resultColumn;
 
     @FXML
-    private Label paginationLabel;
+    private Label resultCountLabel;
 
     @FXML
     private void initialize() {
@@ -148,10 +148,9 @@ public class LoginHistoryController {
         loginHistoryTable.setItems(
             FXCollections.observableArrayList(filtered)
         );
-        paginationLabel.setText(filtered.isEmpty()
+        resultCountLabel.setText(filtered.isEmpty()
             ? "Không có lượt đăng nhập phù hợp"
-            : "Hiển thị 1–" + filtered.size()
-                + " trên " + filtered.size() + " lượt đăng nhập");
+            : "Hiển thị " + filtered.size() + " lượt đăng nhập");
     }
 
     @FXML

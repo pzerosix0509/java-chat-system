@@ -83,7 +83,7 @@ public class UserManagementController {
     private TableColumn<UserRow, UserRow> actionColumn;
 
     @FXML
-    private Label paginationLabel;
+    private Label resultCountLabel;
 
     private Consumer<UserRow> viewUserHandler = user -> {
     };
@@ -340,10 +340,9 @@ public class UserManagementController {
         usersTable.setItems(
             FXCollections.observableArrayList(filtered)
         );
-        paginationLabel.setText(filtered.isEmpty()
+        resultCountLabel.setText(filtered.isEmpty()
             ? "Không có người dùng phù hợp"
-            : "Hiển thị 1–" + filtered.size()
-                + " trên " + filtered.size() + " người dùng");
+            : "Hiển thị " + filtered.size() + " người dùng");
         usersTable.refresh();
     }
 
@@ -419,6 +418,9 @@ public class UserManagementController {
             Node cancelButton = dialog.getDialogPane()
                 .lookupButton(ButtonType.CANCEL);
             cancelButton.getStyleClass().add("dialog-button-secondary");
+            if (cancelButton instanceof Button button) {
+                button.setText("Hủy");
+            }
 
             Node saveButton = dialog.getDialogPane()
                 .lookupButton(saveType);
@@ -486,6 +488,9 @@ public class UserManagementController {
         Node cancelButton = dialog.getDialogPane()
             .lookupButton(ButtonType.CANCEL);
         cancelButton.getStyleClass().add("dialog-button-secondary");
+        if (cancelButton instanceof Button button) {
+            button.setText("Hủy");
+        }
 
         Node lockButton = dialog.getDialogPane()
             .lookupButton(lockType);
@@ -559,6 +564,9 @@ public class UserManagementController {
             .lookupButton(ButtonType.CANCEL);
         if (cancelButton != null) {
             cancelButton.getStyleClass().add("dialog-button-secondary");
+            if (cancelButton instanceof Button button) {
+                button.setText("Hủy");
+            }
         }
     }
 

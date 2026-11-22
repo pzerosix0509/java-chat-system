@@ -659,6 +659,9 @@ public class UserDetailController {
             .lookupButton(ButtonType.CANCEL);
         if (cancelButton != null) {
             cancelButton.getStyleClass().add("dialog-button-secondary");
+            if (cancelButton instanceof Button button) {
+                button.setText("Hủy");
+            }
         }
     }
 

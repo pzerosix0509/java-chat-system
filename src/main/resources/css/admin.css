@@ -1042,11 +1042,12 @@
 }
 
 .filter-bar {
-    -fx-padding: 14px;
+    -fx-padding: 14px 16px;
     -fx-background-color: -surface;
-    -fx-background-radius: 12px;
-    -fx-border-color: -border;
-    -fx-border-radius: 12px;
+    -fx-background-radius: 14px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-effect: dropshadow(gaussian, rgba(30, 30, 30, 0.035), 12, 0.12, 0, 2);
 }
 
 .filter-field {
@@ -1101,8 +1102,10 @@
     -fx-padding: 0;
     -fx-background-color: -surface;
     -fx-background-radius: 14px;
-    -fx-border-color: -border;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
     -fx-border-radius: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(30, 30, 30, 0.035), 12, 0.12, 0, 2);
 }
 
 .admin-table {
@@ -1112,8 +1115,10 @@
 }
 
 .admin-table .column-header-background {
-    -fx-background-color: #FCFCFC;
+    -fx-background-color: -surface;
     -fx-background-radius: 14px 14px 0 0;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
 }
 
 .admin-table .column-header {
@@ -1229,35 +1234,6 @@
     -fx-icon-color: white;
 }
 
-.table-pagination {
-    -fx-padding: 12px 14px;
-}
-
-.pagination-copy {
-    -fx-font-size: 10px;
-    -fx-text-fill: -text-muted;
-}
-
-.pagination-button {
-    -fx-min-width: 28px;
-    -fx-pref-width: 28px;
-    -fx-min-height: 28px;
-    -fx-pref-height: 28px;
-    -fx-padding: 0;
-    -fx-background-color: -surface;
-    -fx-border-color: -muted-border;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    -fx-font-size: 10px;
-    -fx-text-fill: -text-primary;
-}
-
-.pagination-active {
-    -fx-background-color: -brand-orange;
-    -fx-border-color: -brand-orange;
-    -fx-text-fill: white;
-}
-
 /* =====================================================
    USER DETAIL AND FORM
    ===================================================== */
@@ -1276,8 +1252,7 @@
 }
 
 .user-detail-header,
-.detail-card,
-.form-password-section {
+.detail-card {
     -fx-padding: 16px;
     -fx-background-color: -surface;
     -fx-background-radius: 14px;
@@ -1313,10 +1288,6 @@
 
 .user-detail-header .button {
     -fx-min-height: 34px;
-}
-
-.detail-tab-content {
-    -fx-padding: 14px 0 0 0;
 }
 
 .detail-card-title,
@@ -1357,11 +1328,6 @@
 
 .form-input {
     -fx-max-width: Infinity;
-}
-
-.form-password-section {
-    -fx-background-color: #FFFBF6;
-    -fx-border-color: #FFE0C2;
 }
 
 .admin-dialog .dialog-pane {
@@ -1465,15 +1431,6 @@
     -fx-icon-color: white;
 }
 
-.filter-bar {
-    -fx-padding: 14px 16px;
-    -fx-background-color: -surface;
-    -fx-background-radius: 14px;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-effect: dropshadow(gaussian, rgba(30, 30, 30, 0.035), 12, 0.12, 0, 2);
-}
-
 .filter-bar .filter-button {
     -fx-translate-y: 0;
 }
@@ -1491,25 +1448,12 @@
     -fx-effect: dropshadow(gaussian, rgba(255, 119, 0, 0.28), 7, 0.2, 0, 0);
 }
 
-.table-card {
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-    -fx-effect: dropshadow(gaussian, rgba(30, 30, 30, 0.035), 12, 0.12, 0, 2);
-}
-
 .admin-table,
 .admin-table .virtual-flow,
 .admin-table .virtual-flow .clipped-container,
 .admin-table .virtual-flow .sheet,
 .admin-table .filler {
     -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-border-width: 0;
-}
-
-.admin-table .column-header-background {
-    -fx-background-color: -surface;
-    -fx-background-radius: 14px 14px 0 0;
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
@@ -1559,21 +1503,6 @@
 .admin-table .scroll-bar:vertical .track,
 .admin-table .scroll-bar:horizontal .track {
     -fx-background-color: transparent;
-}
-
-.pagination-button {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.pagination-button:hover {
-    -fx-background-color: -brand-yellow;
-}
-
-.pagination-active,
-.pagination-active:hover {
-    -fx-background-color: -brand-orange;
-    -fx-text-fill: white;
 }
 
 /* =====================================================
@@ -1975,6 +1904,32 @@
 }
 
 /* =====================================================
+   LIST STATISTICS
+   ===================================================== */
+
+.table-result-footer {
+    -fx-min-height: 42px;
+    -fx-padding: 0 14px;
+    -fx-border-color: -border transparent transparent transparent;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.table-result-copy {
+    -fx-font-size: 10px;
+    -fx-text-fill: -text-muted;
+}
+
+.stat-number-cell {
+    -fx-font-weight: bold;
+    -fx-text-fill: -text-primary;
+}
+
+.table-status-deleted {
+    -fx-background-color: -border;
+    -fx-text-fill: -text-muted;
+}
+
+/* =====================================================
    GROUP MANAGEMENT
    ===================================================== */
 
@@ -2272,6 +2227,8 @@
 
 .spam-report-layout {
     -fx-alignment: TOP_LEFT;
+    -fx-hgap: 16px;
+    -fx-vgap: 16px;
 }
 
 .spam-report-main {
@@ -2332,15 +2289,27 @@
     -fx-background-radius: 8px;
 }
 
-.spam-evidence-image {
-    -fx-smooth: true;
+.spam-evidence-chat-preview {
+    -fx-alignment: TOP_LEFT;
 }
 
-.spam-evidence-fallback {
-    -fx-padding: 14px;
-    -fx-alignment: CENTER;
-    -fx-text-alignment: CENTER;
-    -fx-font-size: 9px;
+.spam-evidence-chat-bubble {
+    -fx-max-width: 160px;
+    -fx-padding: 7px 9px;
+    -fx-background-color: -surface;
+    -fx-background-radius: 9px;
+    -fx-font-size: 8px;
+    -fx-text-fill: -text-primary;
+}
+
+.spam-evidence-chat-bubble-reported {
+    -fx-background-color: rgba(255, 71, 54, 0.12);
+    -fx-border-color: rgba(255, 71, 54, 0.32);
+    -fx-border-radius: 9px;
+}
+
+.spam-evidence-chat-time {
+    -fx-font-size: 7px;
     -fx-text-fill: -text-muted;
 }
 
@@ -2479,9 +2448,4 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 14, 0.16, 0, 4);
     -fx-font-size: 10px;
     -fx-text-fill: white;
-}
-
-.spam-report-layout {
-    -fx-hgap: 16px;
-    -fx-vgap: 16px;
 }

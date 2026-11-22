@@ -82,9 +82,11 @@ public final class GroupAdminService {
         int[] memberIndexes
     ) {
         List<MemberRow> members = java.util.stream.IntStream
-            .range(0, memberIndexes.length)
+            .range(0, memberCount)
             .mapToObj(index -> {
-                UserRow user = users.get(memberIndexes[index]);
+                UserRow user = index < memberIndexes.length
+                    ? users.get(memberIndexes[index])
+                    : createSyntheticMember(id, index);
                 boolean administrator = index < adminCount;
                 return new MemberRow(
                     user,
@@ -102,6 +104,23 @@ public final class GroupAdminService {
             memberCount,
             adminCount,
             members
+        );
+    }
+
+    private UserRow createSyntheticMember(long groupId, int index) {
+        int displayNumber = index + 1;
+        return new UserRow(
+            10_000L + groupId * 100 + index,
+            "member" + groupId + "_" + displayNumber,
+            String.format("Thành viên %02d", displayNumber),
+            "TP.HCM",
+            LocalDate.of(2002, 1, 1).plusDays(index),
+            "Khác",
+            "member" + groupId + "_" + displayNumber
+                + "@mybrand.vn",
+            LocalDateTime.of(2024, 9, 1, 8, 0)
+                .plusDays(index),
+            UserRow.Status.ACTIVE
         );
     }
 }

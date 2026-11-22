@@ -46,12 +46,33 @@ public final class SpamReportService {
         String adminReason,
         String reporterMessage
     ) {
+        if (lockAccount) {
+            UserManagementService.getInstance().lockUser(
+                report.getAccused(),
+                calculateLockUntil(duration),
+                adminReason
+            );
+        }
         report.setDecision(
             lockAccount ? "Khóa tài khoản" : "Không khóa",
             lockAccount ? duration : null,
             adminReason,
             reporterMessage
         );
+    }
+
+    private LocalDateTime calculateLockUntil(String duration) {
+        LocalDateTime now = LocalDateTime.now();
+        return switch (duration) {
+            case "24 giờ" -> now.plusHours(24);
+            case "3 ngày" -> now.plusDays(3);
+            case "7 ngày" -> now.plusDays(7);
+            case "30 ngày" -> now.plusDays(30);
+            case "Vĩnh viễn" -> null;
+            default -> throw new IllegalArgumentException(
+                "Thời hạn khóa không hợp lệ: " + duration
+            );
+        };
     }
 
     private void seedReports() {
@@ -121,8 +142,8 @@ public final class SpamReportService {
             List.of(
                 new Evidence(
                     "Ảnh chụp màn hình hội thoại",
-                    "Nguồn: gg",
-                    "https://png.pngtree.com/png-clipart/20190904/original/pngtree-cartoon-info-icon-download-png-image_4476204.jpg",
+                    "Bản xem trước hội thoại do hệ thống tạo",
+                    "",
                     false
                 ),
                 new Evidence(

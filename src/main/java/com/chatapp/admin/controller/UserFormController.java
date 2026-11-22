@@ -13,6 +13,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 
 public class UserFormController {
@@ -70,6 +71,10 @@ public class UserFormController {
 
         genderComboBox.getSelectionModel().selectFirst();
         statusComboBox.getSelectionModel().selectFirst();
+        statusComboBox.setDisable(true);
+        statusComboBox.setTooltip(new Tooltip(
+            "Trạng thái được thay đổi bằng thao tác khóa hoặc mở khóa."
+        ));
         hideValidation();
     }
 
@@ -143,9 +148,9 @@ public class UserFormController {
             ? LocalDateTime.now()
             : editingUser.getCreatedAt();
 
-        Status status = Status.ACTIVE.getLabel().equals(
-            statusComboBox.getValue()
-        ) ? Status.ACTIVE : Status.LOCKED;
+        Status status = editingUser == null
+            ? Status.ACTIVE
+            : editingUser.getStatus();
 
         return new UserRow(
             id,
