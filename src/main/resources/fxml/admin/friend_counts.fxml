@@ -1,16 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import com.chatapp.admin.component.FilterBar?>
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-project-diagram" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Quan hệ bạn bè" styleClass="empty-page-title" />
-        <Label text="Số lượng bạn trực tiếp và bạn của bạn sẽ được xây dựng sau"
-               styleClass="empty-page-description" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.FriendCountsController"
+      spacing="14" styleClass="admin-page">
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-heading">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Quan hệ bạn bè" styleClass="page-heading-title" />
+            <Label text="Phân tích số bạn trực tiếp và mạng lưới kết nối cấp hai."
+                   styleClass="page-heading-description" />
+        </VBox>
+        <!-- <FontIcon iconLiteral="fas-project-diagram" iconSize="22" styleClass="page-heading-icon" /> -->
+    </HBox>
+    <FilterBar>
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="6" HBox.hgrow="ALWAYS" styleClass="filter-field,filter-grow">
+                    <Label text="TÌM KIẾM" styleClass="filter-label" />
+                    <TextField fx:id="keywordField" promptText="Họ tên hoặc username..."
+                               onAction="#applyFilters" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="SO SÁNH" styleClass="filter-label" />
+                    <ComboBox fx:id="comparisonFilter" prefWidth="125" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="BẠN TRỰC TIẾP" styleClass="filter-label" />
+                    <TextField fx:id="directFriendValueField" promptText="Nhập số"
+                               onAction="#applyFilters" prefWidth="110" styleClass="filter-input" />
+                </VBox>
+            </HBox>
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="SẮP XẾP" styleClass="filter-label" />
+                    <ComboBox fx:id="sortFieldFilter" prefWidth="170" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="THỨ TỰ" styleClass="filter-label" />
+                    <ComboBox fx:id="sortDirectionFilter" prefWidth="130" styleClass="filter-input" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Áp dụng" onAction="#applyFilters"
+                        styleClass="button-primary,filter-button">
+                    <graphic><FontIcon iconLiteral="fas-filter" iconSize="12" /></graphic>
+                </Button>
+                <Button text="Đặt lại" onAction="#resetFilters"
+                        styleClass="button-outline,filter-button" />
+            </HBox>
+        </VBox>
+    </FilterBar>
+    <Label fx:id="filterWarningLabel" visible="false" managed="false"
+           styleClass="filter-warning" />
+    <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+        <SortableTableView fx:id="friendCountsTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="userColumn" text="NGƯỜI DÙNG" prefWidth="250" />
+                <TableColumn fx:id="createdAtColumn" text="NGÀY TẠO" prefWidth="145" />
+                <TableColumn fx:id="directColumn" text="BẠN TRỰC TIẾP" prefWidth="135" />
+                <TableColumn fx:id="secondDegreeColumn" text="BẠN CẤP HAI" prefWidth="135" />
+                <TableColumn fx:id="totalColumn" text="TỔNG KẾT NỐI" prefWidth="135" />
+            </columns>
+        </SortableTableView>
+        <HBox alignment="CENTER_LEFT" styleClass="table-result-footer">
+            <Label fx:id="resultCountLabel" styleClass="table-result-copy" />
+        </HBox>
     </VBox>
-</StackPane>
+</VBox>

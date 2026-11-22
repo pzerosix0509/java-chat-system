@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import com.chatapp.admin.component.DatePickerStyler;
 import com.chatapp.admin.component.SortableTableView;
 import com.chatapp.admin.dto.SpamReportRow;
 import com.chatapp.admin.dto.SpamReportRow.Status;
@@ -82,6 +83,8 @@ public class SpamReportsController {
 
     @FXML
     private void initialize() {
+        DatePickerStyler.installCalendarIcon(fromDatePicker);
+        DatePickerStyler.installCalendarIcon(toDatePicker);
         configureFilters();
         configureTable();
         refreshReports();
@@ -118,25 +121,25 @@ public class SpamReportsController {
         fromDatePicker.setValue(null);
         toDatePicker.setValue(null);
         statusFilter.getSelectionModel().selectFirst();
-        sortFilter.setValue("Thời gian mới nhất");
+        sortFilter.setValue("Mới nhất");
         hideWarning();
         refreshReports();
     }
 
     private void configureFilters() {
         statusFilter.getItems().setAll(
-            "Tất cả trạng thái",
+            "Tất cả",
             Status.PENDING.getLabel(),
             Status.REVIEWING.getLabel(),
             Status.RESOLVED.getLabel()
         );
         sortFilter.getItems().setAll(
-            "Thời gian mới nhất",
-            "Thời gian cũ nhất",
+            "Mới nhất",
+            "Cũ nhất",
             "Tên đăng nhập"
         );
         statusFilter.getSelectionModel().selectFirst();
-        sortFilter.setValue("Thời gian mới nhất");
+        sortFilter.setValue("Mới nhất");
         hideWarning();
     }
 
@@ -296,9 +299,9 @@ public class SpamReportsController {
     private Comparator<SpamReportRow> createComparator() {
         String selectedSort = sortFilter.getValue();
         return switch (selectedSort == null
-            ? "Thời gian mới nhất"
+            ? "Mới nhất"
             : selectedSort) {
-            case "Thời gian cũ nhất" ->
+            case "Cũ nhất" ->
                 Comparator.comparing(SpamReportRow::getCreatedAt);
             case "Tên đăng nhập" -> Comparator.comparing(
                 report -> report.getAccused().getUsername(),

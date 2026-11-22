@@ -1,18 +1,27 @@
 package com.chatapp.admin.component;
 
+import java.time.format.DateTimeFormatter;
+
 import org.kordamp.ikonli.javafx.FontIcon;
 
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.DatePicker;
 import javafx.scene.layout.StackPane;
+import javafx.util.converter.LocalDateStringConverter;
 
 public final class DatePickerStyler {
+
+    private static final DateTimeFormatter DATE_FORMAT =
+        DateTimeFormatter.ofPattern("dd/MM/uuuu");
 
     private DatePickerStyler() {
     }
 
     public static void installCalendarIcon(DatePicker datePicker) {
+        datePicker.setConverter(
+            new LocalDateStringConverter(DATE_FORMAT, DATE_FORMAT)
+        );
         datePicker.skinProperty().addListener(
             (observable, oldSkin, newSkin) ->
                 Platform.runLater(() -> replaceCalendarIcon(datePicker))

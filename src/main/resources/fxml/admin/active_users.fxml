@@ -1,16 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
+<?import com.chatapp.admin.component.FilterBar?>
+<?import com.chatapp.admin.component.SortableTableView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<StackPane xmlns:fx="http://javafx.com/fxml"
-           styleClass="route-page">
-    <VBox alignment="CENTER" spacing="8" styleClass="empty-page">
-        <FontIcon iconLiteral="fas-chart-line" iconSize="32" styleClass="empty-page-icon" />
-        <Label text="Người dùng hoạt động" styleClass="empty-page-title" />
-        <Label text="Các chỉ số hoạt động theo khoảng thời gian sẽ được xây dựng sau"
-               styleClass="empty-page-description" />
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.chatapp.admin.controller.ActiveUsersController"
+      spacing="14" styleClass="admin-page">
+    <HBox alignment="CENTER_LEFT" spacing="16" styleClass="page-heading">
+        <VBox spacing="4" HBox.hgrow="ALWAYS">
+            <Label text="Người dùng hoạt động" styleClass="page-heading-title" />
+            <Label text="Theo dõi tần suất mở ứng dụng và hoạt động trò chuyện."
+                   styleClass="page-heading-description" />
+        </VBox>
+        <!-- <FontIcon iconLiteral="fas-chart-line" iconSize="22" styleClass="page-heading-icon" /> -->
+    </HBox>
+    <FilterBar>
+        <VBox spacing="10" HBox.hgrow="ALWAYS">
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="6" HBox.hgrow="ALWAYS" styleClass="filter-field,filter-grow">
+                    <Label text="TÌM KIẾM" styleClass="filter-label" />
+                    <TextField fx:id="keywordField" promptText="Họ tên hoặc username..."
+                               onAction="#applyFilters" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="TỪ NGÀY" styleClass="filter-label" />
+                    <DatePicker fx:id="fromDatePicker" prefWidth="145" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="ĐẾN NGÀY" styleClass="filter-label" />
+                    <DatePicker fx:id="toDatePicker" prefWidth="145" styleClass="filter-input" />
+                </VBox>
+            </HBox>
+            <HBox spacing="10" alignment="BOTTOM_LEFT">
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="CHỈ SỐ" styleClass="filter-label" />
+                    <ComboBox fx:id="metricFilter" prefWidth="180" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="SO SÁNH" styleClass="filter-label" />
+                    <ComboBox fx:id="comparisonFilter" prefWidth="125" styleClass="filter-input" />
+                </VBox>
+                <VBox spacing="6" styleClass="filter-field">
+                    <Label text="GIÁ TRỊ" styleClass="filter-label" />
+                    <TextField fx:id="metricValueField" promptText="Nhập số"
+                               onAction="#applyFilters" prefWidth="105" styleClass="filter-input" />
+                </VBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Áp dụng" onAction="#applyFilters"
+                        styleClass="button-primary,filter-button">
+                    <graphic><FontIcon iconLiteral="fas-filter" iconSize="12" /></graphic>
+                </Button>
+                <Button text="Đặt lại" onAction="#resetFilters"
+                        styleClass="button-outline,filter-button" />
+            </HBox>
+        </VBox>
+    </FilterBar>
+    <Label fx:id="filterWarningLabel" visible="false" managed="false"
+           styleClass="filter-warning" />
+    <VBox styleClass="table-card" VBox.vgrow="ALWAYS">
+        <SortableTableView fx:id="activeUsersTable" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="userColumn" text="NGƯỜI DÙNG" prefWidth="240" />
+                <TableColumn fx:id="opensColumn" text="MỞ ỨNG DỤNG" prefWidth="125" />
+                <TableColumn fx:id="peopleColumn" text="NGƯỜI ĐÃ CHAT" prefWidth="130" />
+                <TableColumn fx:id="groupsColumn" text="NHÓM ĐÃ CHAT" prefWidth="130" />
+                <TableColumn fx:id="lastActivityColumn" text="HOẠT ĐỘNG GẦN NHẤT" prefWidth="180" />
+            </columns>
+        </SortableTableView>
+        <HBox alignment="CENTER_LEFT" styleClass="table-result-footer">
+            <Label fx:id="resultCountLabel" styleClass="table-result-copy" />
+        </HBox>
     </VBox>
-</StackPane>
+</VBox>

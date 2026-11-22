@@ -23,7 +23,7 @@
     -text-muted: #727272;
     -text-on-primary: #FFFFFF;
 
-    -fx-font-family: "Inter";
+    -fx-font-family: "Inter", "Segoe UI", sans-serif;
     -fx-font-size: 13px;
     -fx-background-color: -page-background;
 }

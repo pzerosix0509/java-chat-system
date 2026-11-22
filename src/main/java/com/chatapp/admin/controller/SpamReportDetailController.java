@@ -16,12 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class SpamReportDetailController {
@@ -212,7 +209,7 @@ public class SpamReportDetailController {
     }
 
     private void updateDecisionLayout(double width) {
-        boolean narrow = width < 1050;
+        boolean narrow = width < 820;
         GridPane.setColumnIndex(decisionPanel, narrow ? 0 : 1);
         GridPane.setRowIndex(decisionPanel, narrow ? 1 : 0);
         GridPane.setColumnSpan(decisionPanel, narrow ? 2 : 1);
@@ -281,28 +278,25 @@ public class SpamReportDetailController {
         VBox card = new VBox(8);
         card.getStyleClass().add("spam-evidence-card");
 
-        StackPane preview = new StackPane();
-        preview.getStyleClass().add("spam-evidence-preview");
-        Image image = new Image(evidence.imageUrl(), true);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(188);
-        imageView.setFitHeight(168);
-        imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.getStyleClass().add("spam-evidence-image");
-        Label fallback = new Label("Không tải được ảnh bằng chứng");
-        fallback.setWrapText(true);
-        fallback.getStyleClass().add("spam-evidence-fallback");
-        fallback.setVisible(false);
-        fallback.setManaged(false);
-        image.errorProperty().addListener((observable, oldValue, failed) -> {
-            if (failed) {
-                imageView.setVisible(false);
-                fallback.setVisible(true);
-                fallback.setManaged(true);
-            }
-        });
-        preview.getChildren().addAll(imageView, fallback);
+        VBox preview = new VBox(7);
+        preview.getStyleClass().addAll(
+            "spam-evidence-preview",
+            "spam-evidence-chat-preview"
+        );
+        Label sender = new Label("Bạn đã xem ưu đãi này chưa?");
+        sender.setWrapText(true);
+        sender.getStyleClass().add("spam-evidence-chat-bubble");
+        Label repeated = new Label(
+            "Nhấn vào liên kết này để nhận quà ngay."
+        );
+        repeated.setWrapText(true);
+        repeated.getStyleClass().addAll(
+            "spam-evidence-chat-bubble",
+            "spam-evidence-chat-bubble-reported"
+        );
+        Label timestamp = new Label("08:52 · Nội dung được báo cáo");
+        timestamp.getStyleClass().add("spam-evidence-chat-time");
+        preview.getChildren().addAll(sender, repeated, timestamp);
 
         Label title = new Label(evidence.title());
         title.getStyleClass().add("spam-evidence-title");

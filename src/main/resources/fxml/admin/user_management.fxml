@@ -105,16 +105,9 @@
         </SortableTableView>
 
         <HBox alignment="CENTER_LEFT"
-              spacing="8"
-              styleClass="table-pagination">
-            <Label fx:id="paginationLabel"
-                   styleClass="pagination-copy" />
-            <Region HBox.hgrow="ALWAYS" />
-            <Button text="‹" styleClass="pagination-button" />
-            <Button text="1" styleClass="pagination-button,pagination-active" />
-            <Button text="2" styleClass="pagination-button" />
-            <Button text="3" styleClass="pagination-button" />
-            <Button text="›" styleClass="pagination-button" />
+              styleClass="table-result-footer">
+            <Label fx:id="resultCountLabel"
+                   styleClass="table-result-copy" />
         </HBox>
     </VBox>
 
