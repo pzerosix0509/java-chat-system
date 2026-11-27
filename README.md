@@ -54,6 +54,10 @@ tìm `./config.properties` rồi `./release/config.properties`.
 File chỉ định bị thiếu/sai sẽ báo lỗi, không tự dùng mặc định.
 `-Dapp.config` được chuyển tiếp cả khi chạy `javafx:run`.
 
+Windows có App Control chặn DLL JavaFX chưa ký: dùng runtime JavaFX được ký,
+không tắt policy. Xem mục “Protected Windows” trong tài liệu CORE-01.
+Máy phát triển này đã kiểm chứng cả Admin/User với ZuluFX 21.0.13.1.
+
 Chi tiết phiên bản, API cấu hình, test UI, CI và minh chứng:
 [`docs/core-01.md`](docs/core-01.md).
 

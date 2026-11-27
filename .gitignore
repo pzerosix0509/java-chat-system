@@ -2,6 +2,8 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 .mvn/timing.properties
+# Optional per-machine JavaFX launcher (signed runtime on protected Windows).
+/.mvn/maven.config
 
 # Java
 *.class

@@ -151,6 +151,44 @@ Local evidence (2026-11-27, Windows, Temurin 21.0.12.1):
   Control rejecting the downloaded JavaFX DLLs. No OS security policy was changed.
   Linux CI provides the separate native UI check.
 
+### Protected Windows
+
+The Maven Central JavaFX DLLs can be rejected by App Control even when compilation
+passes. Use a publisher-signed JavaFX runtime instead of weakening OS policy.
+
+On the development machine, Azul ZuluFX JDK 21.0.13.1 was downloaded from the
+[official Azul API](https://docs.azul.com/core/install/metadata-api), SHA-256 checked,
+and all DLLs in its bin/javafx directory had valid Azul Systems signatures.
+The portable runtime is installed at:
+
+`C:/Users/tdp05/.jdks/zulu21-fx-21.0.13.1`
+
+A machine-local, gitignored `.mvn/maven.config` selects it for JavaFX launch:
+
+```text
+-Djavafx.executable=C:/Users/tdp05/.jdks/zulu21-fx-21.0.13.1/bin/java.exe
+```
+
+Other developers must use their own signed runtime path. The application compiler
+and Maven JDK remain JDK 21; the JavaFX launcher property affects UI processes.
+The file is optional and is never committed with a developer-specific path.
+For one run, the same property can be passed on the Maven command line.
+
+In IntelliJ Maven configurations, select this worktree as the working directory
+and POM, and set Maven home to Wrapper. If the IDE does not apply the local file,
+add `-Djavafx.executable=<absolute-path-to-signed-runtime>/bin/java.exe` to
+the Maven command line explicitly.
+
+After this change, both normal Maven UI launch commands opened their actual login
+windows on Windows. Both JavaFX startup tests also passed with the signed runtime:
+
+```powershell
+$env:JAVA_HOME = 'C:/Users/tdp05/.jdks/zulu21-fx-21.0.13.1'
+.\mvnw.cmd -Pui-smoke -Dtest=JavaFxBootstrapTest '-DargLine=--add-modules=javafx.controls,javafx.fxml' test
+```
+
+No Windows security settings or system JAVA_HOME/PATH were changed.
+
 Cross-member review and running the README commands on all three members' machines
 remain human acceptance steps. CI runs on three operating systems are not evidence
 that those individual machines were tested.
