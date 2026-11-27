@@ -1,14 +1,65 @@
-# Java Chat System — Scaffold
+# Java Chat System
 
-> **Trạng thái:** chỉ là cấu trúc thư mục / khung tập tin. Chưa có implementation.
-> Mọi file `.java`, `.fxml`, `.sql`, `.css` đang để trống làm placeholder.
-
-Đồ án cuối kỳ môn Lập trình ứng dụng Java. Gồm 2 phân hệ dùng chung một cơ sở dữ liệu MySQL:
+Đồ án cuối kỳ môn Lập trình ứng dụng Java. Gồm hai client JavaFX (Admin/User)
+và server TCP dùng PostgreSQL. UI hiện còn dữ liệu mẫu; backend được triển khai
+theo các issue của sprint. CORE-01 (#8) cung cấp build, cấu hình và CI.
 
 - **Admin** — quản lý người dùng, lịch sử đăng nhập, nhóm chat, spam, thống kê & biểu đồ.
 - **User** — đăng ký/đăng nhập, bạn bè, chat 1-1, nhóm chat mã hóa, LLM gợi ý tin nhắn.
 
-Stack dự kiến: **JavaFX + Maven + MySQL 8 + Socket (TCP) + Jackson + Logback**.
+Stack đã chốt: **Temurin JDK 21 + JavaFX 21 + Maven Wrapper 3.9.16 +
+PostgreSQL 17/JDBC/HikariCP + TCP/JSON/Jackson 2 + SLF4J/Logback +
+Password4j Argon2id + Jakarta Mail/Angus + JUnit Jupiter 6**.
+
+## Build và chạy (CORE-01)
+
+Cài **Temurin JDK 21**, đặt `JAVA_HOME` và kiểm tra `java -version`.
+Wrapper tự tải đúng Maven ở lần chạy đầu; không cần cài Maven hay JavaFX SDK riêng.
+Chạy tại thư mục có `pom.xml` của project gốc:
+
+```powershell
+# Windows PowerShell — lệnh build chung của nhóm
+.\mvnw.cmd -B -ntp clean verify
+
+# Hai UI (hai terminal riêng)
+.\mvnw.cmd -Padmin-ui javafx:run
+.\mvnw.cmd -Puser-ui javafx:run
+
+# Chẩn đoán cấu hình client, không cần database/SMTP/LLM
+.\mvnw.cmd -Pconfig-check compile exec:java
+```
+
+macOS/Linux dùng `./mvnw` thay cho `.\mvnw.cmd`, cùng tham số.
+Build chỉ lấy source từ `src/main` và test từ `src/test` của project gốc;
+`12/`, các ZIP tham khảo và project Swing không thuộc build chính.
+
+Server đọc thông tin PostgreSQL từ file riêng; không đưa secret vào client:
+
+```powershell
+Copy-Item release/server.example.properties release/server.local.properties
+# Sửa db.username trong file; đặt mật khẩu ở môi trường riêng của terminal server.
+$env:CHATAPP_DB_PASSWORD = '<mat-khau-database-cua-ban>'
+.\mvnw.cmd -Pserver '-Dapp.config=release/server.local.properties' compile exec:java
+.\mvnw.cmd -Pconfig-check '-Dapp.config=release/server.local.properties' '-Dexec.args=--connect-db' compile exec:java
+```
+
+Lệnh `server` ở CORE-01 xác thực cấu hình rồi kết thúc; chưa mở cổng TCP.
+Accept loop, protocol và kết nối thật thuộc #10. `--connect-db` thực hiện
+`SELECT 1` thật trên database đã tạo, không tự tạo/import schema.
+Schema và hướng dẫn SQL cũ đang được chuyển sang PostgreSQL trong #9.
+
+Thứ tự cấu hình: **biến môi trường được hỗ trợ > file ngoài > resource mặc định**.
+Chọn file bằng `-Dapp.config=...`, hoặc `CHATAPP_CONFIG`; nếu không chỉ định,
+tìm `./config.properties` rồi `./release/config.properties`.
+File chỉ định bị thiếu/sai sẽ báo lỗi, không tự dùng mặc định.
+`-Dapp.config` được chuyển tiếp cả khi chạy `javafx:run`.
+
+Windows có App Control chặn DLL JavaFX chưa ký: dùng runtime JavaFX được ký,
+không tắt policy. Xem mục “Protected Windows” trong tài liệu CORE-01.
+Máy phát triển này đã kiểm chứng cả Admin/User với ZuluFX 21.0.13.1.
+
+Chi tiết phiên bản, API cấu hình, test UI, CI và minh chứng:
+[`docs/core-01.md`](docs/core-01.md).
 
 ---
 
@@ -114,5 +165,12 @@ Xem chi tiết nội dung báo cáo tại [`docs/README.md`](docs/README.md).
 
 - Cơ sở dữ liệu thiết kế sẵn nằm ở `database/sql/chat_app_schema.sql` và `database/sql/README.md`.
 - `script/` là thư mục nộp bài; các file SQL ở đây là placeholder, có thể tham chiếu/copy từ `database/sql/`.
-- `release/config.properties` là file cấu hình ngoài: chỉ cần sửa thông tin kết nối là chạy được jar.
+- `release/config.properties` chỉ chứa cấu hình public cho client. Server dùng
+  file `*.local.properties` riêng; không commit mật khẩu hoặc API key.
+- `clean verify` hiện tạo JAR thư viện, chưa phải bộ JAR phát hành độc lập.
+  Đóng gói `admin.jar`/`user.jar`/`server.jar` và launcher JavaFX thuộc #35.
 - Không commit file build (`target/`), jar thật, hay ảnh chụp màn hình cá nhân vào `src/`.
+
+## Quality gate (#41)
+
+`./mvnw -B clean verify` runs unit tests and per-class coverage gates. With isolated `CHATAPP_TEST_DB_URL`, `CHATAPP_TEST_DB_USERNAME`, `CHATAPP_TEST_DB_PASSWORD` set, the same command also runs PostgreSQL Failsafe integration tests. Use database `core01_test`, never the demo DB. See [case matrix and evidence](docs/testing/core-01-test-cases.md). QA sign-off remains tester-owned.

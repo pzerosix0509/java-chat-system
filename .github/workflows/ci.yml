@@ -1,0 +1,106 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: JDK 21 / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-java@v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build and run unit tests
+        run: ./mvnw -B -ntp clean verify
+      - name: Check public client configuration
+        run: ./mvnw -B -ntp -Pconfig-check exec:java
+      - name: Install Linux UI dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb libgtk-3-0t64
+      - name: Start Admin and User with real JavaFX
+        if: runner.os == 'Linux'
+        run: xvfb-run -a ./mvnw -B -ntp -Pui-smoke verify
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: tests-${{ matrix.os }}
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            target/site/jacoco/
+            target/jacoco.exec
+          if-no-files-found: warn
+
+  postgres-config:
+    name: External config / PostgreSQL 17
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: core01
+          POSTGRES_PASSWORD: core01-ci-only
+          POSTGRES_DB: core01_test
+        ports:
+          - 5432/tcp
+        options: >-
+          --health-cmd "pg_isready -U core01 -d core01_test"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CHATAPP_TEST_DB_USERNAME: core01
+      CHATAPP_TEST_DB_PASSWORD: core01-ci-only
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-java@v6.3.0
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Run unit, PostgreSQL integration and coverage gates
+        env:
+          CHATAPP_TEST_DB_URL: jdbc:postgresql://127.0.0.1:${{ job.services.postgres.ports[5432] }}/core01_test
+        run: ./mvnw -B -ntp clean verify
+      - name: Prove unit, integration, skip and coverage failures fail verify
+        env:
+          CHATAPP_TEST_DB_URL: jdbc:postgresql://127.0.0.1:${{ job.services.postgres.ports[5432] }}/core01_test
+        run: python3 .github/scripts/verify_quality_gates.py "$RUNNER_TEMP/quality-gate-evidence"
+      - name: Upload integration, coverage and negative gate evidence
+        if: always()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: postgres-quality-gates
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            target/site/jacoco/
+            target/jacoco.exec
+            ${{ runner.temp }}/quality-gate-evidence/
+          if-no-files-found: warn

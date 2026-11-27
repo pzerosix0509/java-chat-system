@@ -1,0 +1,7 @@
+* text=auto
+mvnw text eol=lf
+mvnw.cmd text eol=crlf
+*.sh text eol=lf
+*.ttf binary
+*.png binary
+*.jpg binary

@@ -2,6 +2,8 @@
 target/
 !.mvn/wrapper/maven-wrapper.jar
 .mvn/timing.properties
+# Optional per-machine JavaFX launcher (signed runtime on protected Windows).
+/.mvn/maven.config
 
 # Java
 *.class
@@ -33,6 +35,10 @@ Thumbs.db
 desktop.ini
 
 # Logs & temp
+config.properties
+*.local.properties
+!src/main/resources/config.properties
+!release/config.properties
 *.log
 *.tmp
 *.swp
