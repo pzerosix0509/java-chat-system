@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /** Opt-in real JavaFX startup. Linux CI runs this profile under Xvfb. */
 @Tag("ui")
-class JavaFxBootstrapTest {
+class JavaFxBootstrapIT {
     private static boolean toolkitStarted;
 
     @BeforeAll

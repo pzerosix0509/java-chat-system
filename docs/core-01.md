@@ -130,7 +130,7 @@ and validates JavaFX native libraries for the demo OS.
 ## Verification
 
 - Core tests: `./mvnw -B -ntp clean verify`.
-- Real Admin/User startup: `./mvnw -B -ntp -Pui-smoke -Dtest=JavaFxBootstrapTest test`.
+- Real Admin/User startup: `./mvnw -B -ntp -Pui-smoke verify`.
   Linux needs a display; CI uses `xvfb-run -a` with GTK installed.
 - Real DB config: run ConfigCheck `--connect-db` against two existing databases
   using two different external files and ports; the second invocation needs no rebuild.
@@ -143,7 +143,7 @@ and validates JavaFX native libraries for the demo OS.
 Local evidence (2026-11-27, Windows, Temurin 21.0.12.1):
 
 - 177 Java source files compiled with release 21.
-- `clean verify`: 32 tests, 0 failures/errors, 0 skipped.
+- `clean verify`: 83 unit tests, 0 failures/errors, 0 skipped (quality gate update).
 - Two isolated PostgreSQL databases, `core01_a` and `core01_b`, accepted
   `SELECT 1` with external server ports 9101 and 9102.
 - The second external file also passed the server bootstrap.
@@ -184,7 +184,7 @@ windows on Windows. Both JavaFX startup tests also passed with the signed runtim
 
 ```powershell
 $env:JAVA_HOME = 'C:/Users/tdp05/.jdks/zulu21-fx-21.0.13.1'
-.\mvnw.cmd -Pui-smoke -Dtest=JavaFxBootstrapTest '-DargLine=--add-modules=javafx.controls,javafx.fxml' test
+.\mvnw.cmd -Pui-smoke '-DargLine=--add-modules=javafx.controls,javafx.fxml' verify
 ```
 
 No Windows security settings or system JAVA_HOME/PATH were changed.
@@ -204,3 +204,7 @@ that those individual machines were tested.
   [Logback](https://logback.qos.ch/documentation.html), [Eclipse Angus Mail](https://eclipse-ee4j.github.io/angus-mail/).
 - [JUnit Maven support](https://docs.junit.org/6.1.3/running-tests/build-support.html).
 - [GitHub Actions / Maven](https://docs.github.com/en/actions/tutorials/build-and-test-code/java-with-maven).
+
+## QA #41 update
+
+See [CORE-01 case matrix](testing/core-01-test-cases.md) for Surefire/Failsafe separation, per-class JaCoCo gates, isolated PostgreSQL setup and negative gate proofs. Independent tester review/acceptance remains pending.

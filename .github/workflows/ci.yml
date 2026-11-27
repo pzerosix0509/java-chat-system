@@ -43,13 +43,17 @@ jobs:
           sudo apt-get install -y xvfb libgtk-3-0t64
       - name: Start Admin and User with real JavaFX
         if: runner.os == 'Linux'
-        run: xvfb-run -a ./mvnw -B -ntp -Pui-smoke -Dtest=JavaFxBootstrapTest test
+        run: xvfb-run -a ./mvnw -B -ntp -Pui-smoke verify
       - name: Upload test reports
         if: always()
         uses: actions/upload-artifact@v7.0.2
         with:
           name: tests-${{ matrix.os }}
-          path: target/surefire-reports/
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            target/site/jacoco/
+            target/jacoco.exec
           if-no-files-found: warn
 
   postgres-config:
@@ -62,17 +66,17 @@ jobs:
         env:
           POSTGRES_USER: core01
           POSTGRES_PASSWORD: core01-ci-only
-          POSTGRES_DB: core01_a
+          POSTGRES_DB: core01_test
         ports:
           - 5432/tcp
         options: >-
-          --health-cmd "pg_isready -U core01 -d core01_a"
+          --health-cmd "pg_isready -U core01 -d core01_test"
           --health-interval 5s
           --health-timeout 5s
           --health-retries 10
     env:
-      CHATAPP_DB_USERNAME: core01
-      CHATAPP_DB_PASSWORD: core01-ci-only
+      CHATAPP_TEST_DB_USERNAME: core01
+      CHATAPP_TEST_DB_PASSWORD: core01-ci-only
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-java@v6.3.0
@@ -80,30 +84,23 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
-      - name: Create second real database and external files
+      - name: Run unit, PostgreSQL integration and coverage gates
         env:
-          PG_PORT: ${{ job.services.postgres.ports[5432] }}
-          PG_CONTAINER: ${{ job.services.postgres.id }}
-        run: |
-          docker exec "$PG_CONTAINER" psql -U core01 -d core01_a -c 'CREATE DATABASE core01_b'
-          python3 - <<'PY'
-          import os
-          from pathlib import Path
-          directory = Path(os.environ["RUNNER_TEMP"])
-          for database, port in [("core01_a", 9101), ("core01_b", 9102), ("missing_core01", 9103)]:
-              (directory / f"{database}.properties").write_text(
-                  f"db.url=jdbc:postgresql://127.0.0.1:{os.environ['PG_PORT']}/{database}\n"
-                  f"server.port={port}\n", encoding="utf-8")
-          PY
-      - name: Verify first external URL and server bootstrap
-        run: |
-          ./mvnw -B -ntp -Pconfig-check "-Dapp.config=$RUNNER_TEMP/core01_a.properties" "-Dexec.args=--connect-db" compile exec:java
-          ./mvnw -B -ntp -Pserver "-Dapp.config=$RUNNER_TEMP/core01_a.properties" exec:java
-      - name: Verify second URL without code changes or rebuilding
-        run: ./mvnw -B -ntp -Pconfig-check "-Dapp.config=$RUNNER_TEMP/core01_b.properties" "-Dexec.args=--connect-db" exec:java
-      - name: Missing database must fail
-        run: |
-          if ./mvnw -B -ntp -Pconfig-check "-Dapp.config=$RUNNER_TEMP/missing_core01.properties" "-Dexec.args=--connect-db" exec:java; then
-            echo "Expected the nonexistent database to fail"
-            exit 1
-          fi
+          CHATAPP_TEST_DB_URL: jdbc:postgresql://127.0.0.1:${{ job.services.postgres.ports[5432] }}/core01_test
+        run: ./mvnw -B -ntp clean verify
+      - name: Prove unit, integration, skip and coverage failures fail verify
+        env:
+          CHATAPP_TEST_DB_URL: jdbc:postgresql://127.0.0.1:${{ job.services.postgres.ports[5432] }}/core01_test
+        run: python3 .github/scripts/verify_quality_gates.py "$RUNNER_TEMP/quality-gate-evidence"
+      - name: Upload integration, coverage and negative gate evidence
+        if: always()
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: postgres-quality-gates
+          path: |
+            target/surefire-reports/
+            target/failsafe-reports/
+            target/site/jacoco/
+            target/jacoco.exec
+            ${{ runner.temp }}/quality-gate-evidence/
+          if-no-files-found: warn

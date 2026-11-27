@@ -170,3 +170,7 @@ Xem chi tiết nội dung báo cáo tại [`docs/README.md`](docs/README.md).
 - `clean verify` hiện tạo JAR thư viện, chưa phải bộ JAR phát hành độc lập.
   Đóng gói `admin.jar`/`user.jar`/`server.jar` và launcher JavaFX thuộc #35.
 - Không commit file build (`target/`), jar thật, hay ảnh chụp màn hình cá nhân vào `src/`.
+
+## Quality gate (#41)
+
+`./mvnw -B clean verify` runs unit tests and per-class coverage gates. With isolated `CHATAPP_TEST_DB_URL`, `CHATAPP_TEST_DB_USERNAME`, `CHATAPP_TEST_DB_PASSWORD` set, the same command also runs PostgreSQL Failsafe integration tests. Use database `core01_test`, never the demo DB. See [case matrix and evidence](docs/testing/core-01-test-cases.md). QA sign-off remains tester-owned.
