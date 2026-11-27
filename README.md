@@ -162,9 +162,6 @@ Xem chi tiết nội dung báo cáo tại [`docs/README.md`](docs/README.md).
 ---
 
 ## 4. Ghi chú
-
-- Cơ sở dữ liệu thiết kế sẵn nằm ở `database/sql/chat_app_schema.sql` và `database/sql/README.md`.
-- `script/` là thư mục nộp bài; các file SQL ở đây là placeholder, có thể tham chiếu/copy từ `database/sql/`.
 - `release/config.properties` chỉ chứa cấu hình public cho client. Server dùng
   file `*.local.properties` riêng; không commit mật khẩu hoặc API key.
 - `clean verify` hiện tạo JAR thư viện, chưa phải bộ JAR phát hành độc lập.
