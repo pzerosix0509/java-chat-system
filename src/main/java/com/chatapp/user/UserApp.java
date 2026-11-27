@@ -1,12 +1,24 @@
 package com.chatapp.user;
 
 import com.chatapp.user.navigation.UserNavigator;
+import com.chatapp.common.config.AppConfig;
+import com.chatapp.common.config.ConfigLoader;
 
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class UserApp extends Application {
+    private AppConfig config;
+
+    @Override
+    public void init() {
+        config = ConfigLoader.load();
+    }
+
+    public AppConfig getAppConfig() {
+        return config;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {

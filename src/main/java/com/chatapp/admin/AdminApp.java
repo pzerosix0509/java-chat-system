@@ -1,12 +1,24 @@
 package com.chatapp.admin;
 
 import com.chatapp.admin.navigation.AdminNavigator;
+import com.chatapp.common.config.AppConfig;
+import com.chatapp.common.config.ConfigLoader;
 
 import javafx.application.Application;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class AdminApp extends Application {
+    private AppConfig config;
+
+    @Override
+    public void init() {
+        config = ConfigLoader.load();
+    }
+
+    public AppConfig getAppConfig() {
+        return config;
+    }
 
     @Override
     public void start(Stage stage) throws Exception {

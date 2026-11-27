@@ -33,6 +33,10 @@ Thumbs.db
 desktop.ini
 
 # Logs & temp
+config.properties
+*.local.properties
+!src/main/resources/config.properties
+!release/config.properties
 *.log
 *.tmp
 *.swp
