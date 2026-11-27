@@ -73,8 +73,6 @@ jobs:
     env:
       CHATAPP_DB_USERNAME: core01
       CHATAPP_DB_PASSWORD: core01-ci-only
-      PG_PORT: ${{ job.services.postgres.ports[5432] }}
-      PG_CONTAINER: ${{ job.services.postgres.id }}
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-java@v6.3.0
@@ -83,6 +81,9 @@ jobs:
           java-version: '21'
           cache: maven
       - name: Create second real database and external files
+        env:
+          PG_PORT: ${{ job.services.postgres.ports[5432] }}
+          PG_CONTAINER: ${{ job.services.postgres.id }}
         run: |
           docker exec "$PG_CONTAINER" psql -U core01 -d core01_a -c 'CREATE DATABASE core01_b'
           python3 - <<'PY'
